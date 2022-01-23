@@ -1,0 +1,72 @@
+@use "../../../styles/veriables.scss";
+
+.items__list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+
+  @include veriables.respond(tab) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include veriables.respond(phone) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  font-size: 3.6rem;
+  padding-bottom: 4rem;
+
+  @include veriables.respond(tab) {
+    text-align: center;
+  }
+}
+
+.image {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+}
+
+.image__overlay {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 0.5px solid #eee;
+  border-radius: 50%;
+  position: relative;
+}
+
+.link__content {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.desc {
+  font-size: 1.6rem;
+  color: #323232;
+  font-weight: 700;
+  padding-left: 2rem;
+}
+
+.link__insta__content {
+  width: 100%;
+  padding: 0 9rem;
+  padding-bottom: 2rem;
+
+  @include veriables.respond(tab) {
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    margin-bottom: 2rem;
+  }
+}

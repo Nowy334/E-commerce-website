@@ -1,0 +1,19 @@
+@use '../../../styles/veriables.scss';
+
+.list {
+  display: grid;
+  padding: 0 7.2rem;
+  grid-template-columns: repeat(3, minmax(350px, 1fr));
+  justify-content: center;
+  justify-items: center;
+  grid-gap: 2rem;
+  margin: 0 auto;
+
+  @include veriables.respond(netbook) {
+    grid-template-columns: repeat(2, minmax(310px, 1fr));
+  }
+
+  @include veriables.respond(phone-max) {
+    grid-template-columns: repeat(1, minmax(310px, 1fr));
+  }
+}

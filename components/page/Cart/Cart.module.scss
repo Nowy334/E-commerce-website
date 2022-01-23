@@ -1,0 +1,86 @@
+@use "../../../styles/veriables.scss";
+.container {
+  display: flex;
+  align-items: flex-start;
+  @include veriables.respond(netbook-min) {
+    flex-direction: column;
+  }
+}
+
+.headers {
+  display: flex;
+  justify-content: space-between;
+}
+
+.items {
+  flex: 2;
+  @include veriables.respond(netbook-min) {
+    width: 100%;
+  }
+}
+
+.headers div {
+  &:first-of-type {
+    flex: 2;
+    text-align: start;
+  }
+  flex: 1;
+  text-align: center;
+  font-size: 1.4rem;
+  padding-bottom: 0.5rem;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+.total__price {
+  font-size: 1.5rem;
+}
+
+.summary {
+  margin-left: 4rem;
+  flex: 1;
+  border: 2px solid #000;
+  padding: 2rem;
+
+  @include veriables.respond(netbook-min) {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
+.cart__title {
+  font-size: 2rem;
+  padding-bottom: 0.5rem;
+  display: block;
+  border-bottom: 1px solid #eee;
+}
+
+.cart__summary__content {
+  padding-top: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.cart__text {
+  font-size: 1.6rem;
+  display: flex;
+  margin-bottom: 2rem;
+  justify-content: space-between;
+}
+
+.btn {
+  width: 100%;
+}
+
+.total__price {
+  font-size: 2rem;
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 2rem;
+}
+
+.total {
+  font-weight: 700;
+}

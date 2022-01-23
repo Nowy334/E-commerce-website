@@ -1,0 +1,89 @@
+@use "../../../styles/veriables.scss";
+
+.root {
+  display: flex;
+  justify-content: center;
+  padding: 0 2rem;
+  @include veriables.respond(tab) {
+    flex-direction: column;
+  }
+}
+
+.product__price {
+  font-weight: 700;
+  font-size: 2.6rem;
+  padding: 3rem 0;
+}
+
+.content {
+  margin-left: 4rem;
+  margin-top: 2rem;
+
+  @include veriables.respond(tab) {
+    margin-top: 4rem;
+  }
+
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .desc {
+    font-size: 1.6rem;
+    max-width: 50rem;
+  }
+
+  @include veriables.respond(tab) {
+    margin-left: 0;
+  }
+}
+
+.input__content {
+  width: 10rem;
+  position: relative;
+  margin-right: 2rem;
+}
+
+.quantity__changer {
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  position: absolute;
+  cursor: pointer;
+  top: 50%;
+  outline: none;
+  transform: translateY(-50%);
+
+  &:first-of-type {
+    left: 5px;
+  }
+  &:last-of-type {
+    right: 5px;
+  }
+}
+
+.input {
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  border: 1px solid #eee;
+  outline: none;
+  font-size: 1.5rem;
+  padding: 1rem;
+  text-align: center;
+  width: 10rem;
+}
+
+.add__cart {
+  display: flex;
+  padding-top: 4rem;
+}
+
+.add__cart__btn {
+  border: none;
+  background-color: #000;
+  color: #fff;
+  padding: 1rem 4rem;
+  cursor: pointer;
+}

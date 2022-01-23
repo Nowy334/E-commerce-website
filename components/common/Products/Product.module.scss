@@ -1,0 +1,40 @@
+@use '../../../styles/veriables.scss';
+
+.root {
+  list-style: none;
+}
+
+.product__image {
+  position: relative;
+  width: 350px;
+  height: 350px;
+
+  @include veriables.respond(netbook) {
+    width: 300px;
+    height: 300px;
+  }
+}
+
+.product__content {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+}
+
+.product__title {
+  padding: 2rem 0;
+  font-size: 1.7rem;
+  color: #000;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.product__price {
+  font-size: 1.4rem;
+  color: #a7a7a7;
+}
+
+.product__link {
+  text-decoration: none;
+}

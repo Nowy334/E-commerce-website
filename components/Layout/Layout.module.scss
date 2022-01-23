@@ -1,0 +1,9 @@
+@use "../../styles/veriables.scss";
+
+.page__wrapper {
+  width: 100%;
+  //max-width: 1970px;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 18rem 2rem;
+}

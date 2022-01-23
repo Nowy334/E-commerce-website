@@ -1,0 +1,66 @@
+@use '../../../styles/veriables.scss';
+
+.banner__container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
+  padding-bottom: 9rem;
+
+  &:last-of-type {
+    padding-bottom: 0;
+  }
+
+  &.order {
+    flex-direction: row-reverse;
+    @include veriables.respond(tab) {
+      flex-direction: column;
+    }
+  }
+
+  @include veriables.respond(tab) {
+    flex-direction: column;
+  }
+}
+
+.banner__image {
+  position: relative;
+  width: 332px;
+  height: 440px;
+  box-shadow: 10px 10px 20px 0px rgb(0 0 0 / 12%);
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+.banner__content {
+  @include veriables.respond(tab) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 4rem;
+  }
+  .banner__title {
+    font-size: 3.6rem;
+    text-transform: uppercase;
+
+    @include veriables.respond(tab) {
+      text-align: center;
+    }
+  }
+
+  .banner__desc {
+    font-size: 1.8rem;
+    max-width: 470px;
+    color: #555;
+    line-height: 1.5;
+    margin: 2.6rem 0 3.6rem 0;
+
+    @include veriables.respond(tab) {
+      text-align: center;
+    }
+  }
+}

@@ -1,0 +1,42 @@
+@use '../../styles/veriables.scss';
+
+.footer {
+  padding: 0 72px;
+  height: 9rem;
+  background-color: #000;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  @include veriables.respond(tab) {
+    padding: 0 32px;
+  }
+
+  .copyright {
+    color: #555;
+    font-size: 1.6rem;
+
+    p {
+      padding-bottom: 1rem;
+      transition: all 0.3s 0.1s ease;
+
+      &:hover {
+        color: white;
+      }
+    }
+
+    a {
+      text-decoration: none;
+      color: #555;
+      transition: all 0.3s 0.1s ease;
+
+      &:hover {
+        text-decoration: underline;
+        color: white;
+      }
+    }
+  }
+}

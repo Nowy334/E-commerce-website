@@ -1,0 +1,49 @@
+@use "../../../styles/veriables.scss";
+
+.item {
+  position: relative;
+  width: 250px;
+  height: 250px;
+  margin: 0 1rem;
+  transition: filter 0.3s;
+  display: block;
+
+  @include veriables.respond(netbook) {
+    width: 200px;
+    height: 200px;
+  }
+
+  @include veriables.respond(tab) {
+    width: 250px;
+    height: 250px;
+
+    margin: 1rem;
+  }
+
+  &:hover {
+    filter: brightness(110%);
+  }
+
+  &:first-of-type {
+    margin-left: 0;
+
+    @include veriables.respond(tab) {
+      margin-left: 1rem;
+    }
+  }
+
+  &:last-of-type {
+    margin-right: 0;
+
+    @include veriables.respond(tab) {
+      margin-right: 1rem;
+    }
+  }
+}
+
+.container__item {
+  display: block;
+  position: relative;
+  width: 250px;
+  height: 250px;
+}

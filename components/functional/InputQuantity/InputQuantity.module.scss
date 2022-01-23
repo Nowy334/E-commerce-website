@@ -1,0 +1,40 @@
+.input {
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  border: 1px solid #eee;
+  outline: none;
+  font-size: 1.5rem;
+  padding: 1rem;
+  text-align: center;
+  width: 10rem;
+}
+
+.input__content {
+  width: 10rem;
+  position: relative;
+}
+
+.input__wrapper {
+  outline: none;
+}
+
+.quantity__changer {
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  position: absolute;
+  cursor: pointer;
+  top: 50%;
+  outline: none;
+  transform: translateY(-50%);
+
+  &:first-of-type {
+    left: 5px;
+  }
+  &:last-of-type {
+    right: 5px;
+  }
+}

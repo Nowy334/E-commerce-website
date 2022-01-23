@@ -1,0 +1,39 @@
+$main-color: #ff3d6d;
+
+@mixin respond($breakpoint) {
+  @if $breakpoint == phone {
+    @media only screen and (max-width: 37.5em) {
+      @content;
+    } //600px
+  }
+  @if $breakpoint == phone-max {
+    @media only screen and (max-width: 40.625em) {
+      @content;
+    } //650px
+  }
+  @if $breakpoint == tab {
+    @media only screen and (max-width: 56.25em) {
+      @content;
+    } //900px
+  }
+  @if $breakpoint == netbook-min {
+    @media only screen and (max-width: 62.5em) {
+      @content;
+    } //1000px
+  }
+  @if $breakpoint == netbook {
+    @media only screen and (max-width: 75em) {
+      @content;
+    } //1200px
+  }
+  @if $breakpoint == netbook-max {
+    @media only screen and (max-width: 78.125em) {
+      @content;
+    } //1250px
+  }
+  @if $breakpoint == big-desktop {
+    @media only screen and (min-width: 112.5em) {
+      @content;
+    } //1800px
+  }
+}

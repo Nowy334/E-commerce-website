@@ -1,0 +1,201 @@
+@use "../../../styles/veriables.scss";
+
+.navbar {
+  width: 100%;
+  position: fixed;
+  background-color: white;
+  height: 9rem;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.15);
+  z-index: 10;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.logo {
+  @include veriables.respond(tab) {
+    margin-right: auto;
+    width: 9rem;
+  }
+  width: 10rem;
+  padding-left: 2rem;
+
+  @include veriables.respond(tab) {
+    width: 9rem;
+  }
+
+  @include veriables.respond(phone) {
+  }
+}
+
+.list__elements {
+  list-style: none;
+  display: flex;
+  font-size: 2rem;
+  background-color: #fff;
+  transform: translateX(0);
+
+  @include veriables.respond(tab) {
+    display: flex;
+    position: absolute;
+    top: 9rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    box-shadow: 0 4px 8px rgb(0 0 0 / 7%);
+    text-align: center;
+    z-index: -20;
+
+    transform: translateY(-100%);
+    transition: transform 0.3s 0.1s ease-in-out;
+  }
+}
+
+.navigation--active {
+  transform: translateX(0);
+}
+
+.hamburger {
+  padding: 10px;
+  display: none;
+  cursor: pointer;
+  background-color: transparent;
+  border: 0;
+  margin: 0;
+
+  @include veriables.respond(tab) {
+    display: inline-block;
+  }
+}
+
+.hamburger,
+.navigation {
+  transition: transform 0.3s 0.1s ease-in-out;
+}
+
+.hamburger__box {
+  width: 24px;
+  height: 20px;
+  display: inline-block;
+  position: relative;
+}
+
+.hamburger__inner {
+  width: 100%;
+  height: 2px;
+  background-color: #464646;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: background-color 0.3s 0.1s ease-in-out;
+}
+
+.hamburger__inner::before,
+.hamburger__inner::after {
+  content: "";
+  width: 100%;
+  height: 2px;
+  background-color: #464646;
+  position: absolute;
+  left: 0;
+  transition: transform 0.2s 0.2s ease-in-out;
+}
+
+.hamburger__inner::before {
+  top: -6px;
+}
+
+.hamburger__inner::after {
+  top: 6px;
+}
+
+.hamburger--active .hamburger__inner {
+  background-color: transparent;
+}
+
+.hamburger--active .hamburger__inner::before {
+  transform: translateY(6px) rotate(45deg);
+}
+.hamburger--active .hamburger__inner::after {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+.separator {
+  height: 1.9rem;
+  width: 1px;
+  background-color: #f3f3f3;
+}
+
+.social__media {
+  margin-left: 10px;
+  display: flex;
+  padding-right: 2rem;
+  // margin-right: 72px;
+
+  // @include veriables.respond(tab) {
+  //   margin-right: 32px;
+  // }
+  // @include veriables.respond(phone) {
+  //   margin-right: 16px;
+  // }
+}
+
+.icon {
+  margin: 5px;
+  cursor: pointer;
+  @include veriables.respond(phone) {
+    display: none;
+  }
+  &__fb {
+    transition: fill 0.3s 0.1s ease-in-out;
+    fill: #3b5998;
+    &:hover {
+      fill: #000;
+    }
+  }
+
+  &__insta {
+    transition: fill 0.3s 0.1s ease-in-out;
+    fill: #e1306c;
+    &:hover {
+      fill: #000;
+    }
+  }
+
+  &__cart {
+    transition: color 0.3s 0.1s ease-in-out;
+    color: #e1306c;
+    @include veriables.respond(phone) {
+      display: block;
+    }
+  }
+}
+
+.cart {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+
+  &:hover > .price,
+  &:hover > .icon__cart {
+    color: #000;
+  }
+}
+
+.price {
+  transition: color 0.3s 0.1s ease-in-out;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #e1306c;
+}
