@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
 import s from "./PhotoGallery.module.scss";
-import Image from "next/image";
+import Image, { ImageLoaderProps } from "next/image";
 import LightBox from "../../ui/LightBox/LightBox";
 
 const PhotoGallery: FC<{ photos?: any }> = ({ photos }) => {
@@ -23,11 +23,16 @@ const PhotoGallery: FC<{ photos?: any }> = ({ photos }) => {
     setSelectedImg(item);
   };
 
+  const myLoader = ({ src, width, quality }: ImageLoaderProps) => {
+    return `https:${src}?w=${width}&q=${quality || 75}`;
+  };
+
   const gallery = photos.map((item: any, index: number) => {
     return (
       <div className={s.image} key={index}>
         <Image
-          src={`https:${item.fields.file.url}`}
+          loader={myLoader}
+          src={item.fields.file.url}
           alt={item.fields.title}
           objectFit="cover"
           layout="fill"

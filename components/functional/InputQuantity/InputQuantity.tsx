@@ -1,6 +1,8 @@
 import { FC, useState, useEffect } from "react";
 import s from "./InputQuantity.module.scss";
 import { useAppDispatch } from "../../../store/hooks";
+import { FiPlus } from "react-icons/fi";
+import { FiMinus } from "react-icons/fi";
 import {
   incrementQuantity,
   decrementQuantity,
@@ -26,7 +28,7 @@ const InputQuantity: FC<{ product?: any; type?: string }> = ({
               className={s.quantity__changer}
               onClick={() => dispatch(decrementQuantity(product))}
             >
-              -
+              <FiMinus />
             </span>
             <input
               className={s.input}
@@ -48,7 +50,7 @@ const InputQuantity: FC<{ product?: any; type?: string }> = ({
               className={s.quantity__changer}
               onClick={() => dispatch(incrementQuantity(product))}
             >
-              +
+              <FiPlus />
             </span>
           </div>
         </div>

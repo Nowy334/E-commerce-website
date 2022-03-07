@@ -3,7 +3,6 @@ import { createClient } from "contentful";
 import Link from "next/link";
 import React from "react";
 import Head from "next/head";
-import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import Home from "../components/page/Home/Home";
 import BannerMainPage from "../components/common/BannerMainPage/BannerMainPage";

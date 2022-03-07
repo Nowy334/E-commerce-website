@@ -1,4 +1,4 @@
-@use '../../../styles/veriables.scss';
+@use "../../../styles/veriables.scss";
 
 .banner__container {
   display: flex;
@@ -46,6 +46,7 @@
   .banner__title {
     font-size: 3.6rem;
     text-transform: uppercase;
+    font-weight: 500;
 
     @include veriables.respond(tab) {
       text-align: center;

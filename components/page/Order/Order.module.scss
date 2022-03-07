@@ -1,0 +1,145 @@
+@use "../../../styles/veriables.scss";
+
+.total__price {
+  font-size: 1.5rem;
+}
+
+.summary {
+  margin-left: 4rem;
+  flex: 1;
+  border: 2px solid #000;
+  padding: 2rem;
+
+  @include veriables.respond(netbook-min) {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
+.cart__title {
+  font-size: 2rem;
+  padding-bottom: 0.5rem;
+  display: block;
+  border-bottom: 1px solid #eee;
+}
+
+.cart__summary__content {
+  padding-top: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.cart__text {
+  font-size: 1.6rem;
+  display: flex;
+  margin-bottom: 2rem;
+  justify-content: space-between;
+}
+
+.shimpent {
+  margin-bottom: 0;
+}
+
+.btn {
+  width: 100%;
+  font-size: 1.6rem;
+  padding: 1.4rem 4rem;
+  border: none;
+  cursor: pointer;
+  background-color: #000;
+  //background-color: #ff3d6d;
+  text-decoration: none;
+  font-weight: 500;
+  color: white;
+  display: block;
+  text-align: center;
+  position: relative;
+  transition: background-color 0.4s ease-in-out, transform 0.1s ease-in;
+  overflow: hidden;
+
+  &:hover {
+    background-color: #ff3d6d;
+  }
+
+  &:active {
+    transform: translateY(4px);
+  }
+}
+
+.total__price {
+  font-size: 2rem;
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 2rem;
+  padding-top: 2rem;
+  border-bottom: 1px solid #eee;
+  border-top: 1px solid #eee;
+}
+
+.payment {
+  padding-top: 2rem;
+}
+
+.total {
+  font-weight: 700;
+}
+
+.container {
+  display: flex;
+  align-items: flex-start;
+  @include veriables.respond(netbook-min) {
+    flex-direction: column;
+  }
+}
+
+.cart__items {
+  margin-top: 2rem;
+  border-bottom: 1px solid #eee;
+}
+
+.cart__item {
+  flex-direction: column;
+
+  &--info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+  }
+
+  &--title {
+    margin-right: 1rem;
+  }
+}
+
+.cart__color {
+  font-size: 1.4rem;
+}
+
+.message {
+  position: fixed;
+  z-index: 200;
+  top: 2rem;
+  width: 10rem;
+  padding: 4rem 0;
+  background-color: green;
+  font-size: 16px;
+}
+
+.agreements {
+  margin-bottom: 2rem;
+}
+
+.agreements__content {
+  display: flex;
+  align-items: center;
+  font-size: 1.4rem;
+  input {
+    margin-right: 5px;
+  }
+}
+
+.checked__info {
+  margin-top: 4px;
+  color: red;
+  font-size: 1.4rem;
+}

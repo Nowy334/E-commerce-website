@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
+import Image, { ImageLoaderProps } from "next/image";
 import { MainPageBanner } from "../../../models/mainPageBanner.model";
 import classes from "./BannerMainPage.module.scss";
 import Button from "../../ui/Button";
@@ -8,6 +8,12 @@ const BannerMainPage: React.FC<{ banner: MainPageBanner; order?: boolean }> = ({
   banner,
   order,
 }) => {
+  const myLoader = ({ src, width, quality }: ImageLoaderProps) => {
+    return `https:${banner.image.fields.file.url}?w=${width}&q=${
+      quality || 75
+    }`;
+  };
+
   return (
     <div
       className={classes.banner__container + " " + (order ? classes.order : "")}
@@ -19,7 +25,8 @@ const BannerMainPage: React.FC<{ banner: MainPageBanner; order?: boolean }> = ({
       </div>
       <div className={classes.banner__image}>
         <Image
-          src={`https:${banner.image.fields.file.url}`}
+          loader={myLoader}
+          src={banner.image.fields.file.fileName}
           objectFit="cover"
           layout="fill"
           alt=""

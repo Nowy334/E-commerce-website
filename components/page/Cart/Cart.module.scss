@@ -7,6 +7,12 @@
   }
 }
 
+.mobile {
+  @include veriables.respond(netbook-min) {
+    display: none;
+  }
+}
+
 .headers {
   display: flex;
   justify-content: space-between;
@@ -72,6 +78,12 @@
 
 .btn {
   width: 100%;
+
+  &.disabled {
+    pointer-events: none;
+    cursor: default;
+    background-color: #ccc;
+  }
 }
 
 .total__price {

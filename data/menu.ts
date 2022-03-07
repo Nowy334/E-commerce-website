@@ -1,57 +1,57 @@
-import MenuItems  from "../models/menuItem.model";
+import MenuItems from "../models/menuItem.model";
 
 export const MenuItemsList: MenuItems[] = [
   {
     name: "Home",
-    path:"/"
+    path: "/",
   },
 
   {
     name: "O nas",
-    path:"/o-nas"
+    path: "/o-nas",
   },
 
   {
     name: "Galeria",
-    path:"/galeria"
+    path: "/galeria",
   },
 
   {
     name: "Na sprzedaż",
     submenu: [
       {
-        name: 'Stroje startowe',
-        path: '/stroje-startowe'
+        name: "Stroje startowe",
+        path: "/stroje-startowe",
       },
       {
-        name: 'Ozdoby do wlosow',
-        path: '/ozdoby-do-wlosow'
+        name: "Ozdoby do wlosow",
+        path: "/ozdoby-do-wlosow",
       },
       {
-        name: 'Body',
-        path: '/body'
+        name: "Body",
+        path: "/body",
       },
     ],
-    path:"/na-sprzedaz"
+    path: "/na-sprzedaz",
   },
 
   {
-    name: "Zamowienia",
+    name: "Zamówienia",
     submenu: [
       {
-        name: 'Złóż zamowienie',
-        path: '/'
+        name: "Złóż zamówienie",
+        path: "/",
       },
       {
-        name: 'Sposób mierzenia',
-        path: '/sposob-mierzenia'
+        name: "Sposób mierzenia",
+        path: "/sposob-mierzenia",
       },
     ],
-    path:"/zamowienia"
+    path: "/zamowienia",
   },
 
   {
     name: "Kontakt",
-    path:"/kontakt"
+    path: "/kontakt",
   },
-]
+];

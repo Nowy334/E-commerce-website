@@ -1,18 +1,25 @@
 import { FC } from "react";
 import Link from "next/link";
-import Image from "next/image";
+import Image, { ImageLoaderProps } from "next/image";
 import s from "./Product.module.scss";
 import Price from "../../functional/Price/Price";
 
 const Product: FC<{ product: any; type: string }> = ({ product, type }) => {
   const url = type === "ozdoby" ? "ozdoby-do-wlosow" : "stroje-startowe";
+
+  const myLoader = ({ src, width, quality }: ImageLoaderProps) => {
+    return `https:${product.fields.mainPhoto.fields.file.url}?w=${width}&q=${
+      quality || 75
+    }`;
+  };
   return (
     <li className={s.root}>
       <Link href={`${url}/${product.fields.slug}`}>
         <a className={s.product__link}>
           <div className={s.product__image}>
             <Image
-              src={`https:${product.fields.mainPhoto.fields.file.url}`}
+              loader={myLoader}
+              src={product.fields.mainPhoto.fields.file.fileName}
               alt="główny banner"
               objectFit="cover"
               layout="fill"

@@ -1,7 +1,7 @@
 import type { GetStaticProps, NextPage, InferGetStaticPropsType } from "next";
 import { createClient } from "contentful";
 import ProductsList from "../../components/common/Products/ProductsList";
-import Banner from "../../components/common/Banner/Banner";
+import Header from "../../components/ui/Header/Header";
 
 export const getStaticProps: GetStaticProps = async () => {
   const client = createClient({
@@ -23,7 +23,7 @@ const Outfits: NextPage = ({
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <>
-      <Banner title={"Ozdoby do włosow"} />
+      <Header title={"Stroje startowe"} />
       <main>
         <ProductsList products={outfits} type="stroje" />
       </main>

@@ -6,10 +6,12 @@ const Button: React.FC<{
   btnText?: string;
   square?: boolean;
   classname?: string;
-}> = ({ path, btnText, square = false, classname }) => {
+  onClick?: () => void;
+}> = ({ path, btnText, square = false, classname, onClick }) => {
   return (
     <Link href={path}>
       <a
+        onClick={onClick}
         className={
           classes.btn +
           " " +

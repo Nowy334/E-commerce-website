@@ -1,3 +1,5 @@
+@use "../../../styles/veriables.scss";
+
 .cart__item {
   display: flex;
   justify-content: space-between;
@@ -21,6 +23,7 @@
   position: relative;
   width: 100px;
   height: 100px;
+  cursor: pointer;
 }
 
 .content__wrapper {
@@ -39,6 +42,22 @@
 
 .data {
   font-size: 1.5rem;
+  @include veriables.respond(netbook-min) {
+    display: none !important;
+  }
+}
+
+.mobile {
+  display: none;
+  font-size: 1.3rem;
+  color: #888;
+  @include veriables.respond(netbook-min) {
+    display: flex;
+  }
+}
+
+.quantity__mobile {
+  margin-right: 4px;
 }
 
 .delete {
@@ -49,5 +68,5 @@
 }
 
 .product__content {
-  min-width: 288px;
+  min-width: 200px;
 }

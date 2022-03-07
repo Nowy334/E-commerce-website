@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useAppSelector } from "../../../store/hooks";
 import s from "./Cart.module.scss";
 import ProductsCart from "../../common/ProductsCart/ProductsCart";
@@ -9,18 +8,7 @@ import Price from "../../functional/Price/Price";
 
 const Cart = () => {
   const cartItems = useAppSelector((state) => state.cart);
-  const [shipmentPrice, setShipmentPrice] = useState<number>(0);
-  const [shipmentType, setShipmentType] = useState<string>();
-  const [totalPrice, setTotalPrice] = useState<number>();
-
-  const setShipment = (price: number, type: string) => {
-    setShipmentPrice(price);
-    setShipmentType(type);
-  };
-
-  const handleSetTotalPrice = (price: number) => {
-    setTotalPrice(price);
-  };
+  const totalPriceData = useAppSelector((state) => state.totalPrice);
 
   return (
     <div className={s.root}>
@@ -31,9 +19,9 @@ const Cart = () => {
           <div className={s.items}>
             <div className={s.headers}>
               <div>Produkt</div>
-              <div>Cena</div>
+              <div className={s.mobile}>Cena</div>
               <div>Ilość</div>
-              <div>Razem</div>
+              <div className={s.mobile}>Razem</div>
             </div>
             <ProductsCart products={cartItems} />
           </div>
@@ -46,23 +34,24 @@ const Cart = () => {
               </div>
               <div className={s.cart__text}>
                 <span>Wysyłka</span>
-                <Price price={shipmentPrice} />
+                <Price price={totalPriceData.shipment.price} />
               </div>
-              <Shipment setShipment={setShipment} />
+              <Shipment />
             </div>
             <div className={s.total__price}>
               <span>Suma</span>
               <CartTotalPrice
                 view={s.total}
-                shipment={shipmentPrice}
-                setTotalPrice={handleSetTotalPrice}
+                shipment={totalPriceData.shipment.price}
               />
             </div>
             <Button
-              path="/"
+              path="/order"
               btnText="Przejdź do płatności"
               square={true}
-              classname={s.btn}
+              classname={
+                s.btn + " " + (!totalPriceData.shipment.type ? s.disabled : "")
+              }
             />
           </div>
         </div>

@@ -1,5 +1,4 @@
 import classes from "./Navbar.module.scss";
-import Image from "next/image";
 import logo from "../../../public/assets/logo.png";
 import { MenuItemsList } from "../../../data/menu";
 import MenuItem from "./MenuItem";
@@ -45,7 +44,7 @@ const Navbar = () => {
         <div className={classes.logo}>
           <Link href="/">
             <a>
-              <Image src={logo} alt="logo" width="66" height="79" />
+              <img src={logo.src} alt="logo" width="66" height="79" />
             </a>
           </Link>
         </div>

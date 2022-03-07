@@ -1,3 +1,5 @@
+@use "../../../styles/veriables.scss";
+
 .input {
   &::-webkit-inner-spin-button,
   &::-webkit-outer-spin-button {
@@ -11,10 +13,17 @@
   padding: 1rem;
   text-align: center;
   width: 10rem;
+
+  @include veriables.respond(phone) {
+    width: 8rem;
+  }
 }
 
 .input__content {
   width: 10rem;
+  @include veriables.respond(phone) {
+    width: 8rem;
+  }
   position: relative;
 }
 
@@ -23,13 +32,16 @@
 }
 
 .quantity__changer {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   padding: 0.5rem;
+  line-height: normal;
   position: absolute;
   cursor: pointer;
   top: 50%;
   outline: none;
   transform: translateY(-50%);
+  display: flex;
+  align-items: center;
 
   &:first-of-type {
     left: 5px;

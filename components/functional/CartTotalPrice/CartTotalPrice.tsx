@@ -1,6 +1,8 @@
 import Price from "../Price/Price";
 import { useAppSelector } from "../../../store/hooks";
 import { FC, useEffect } from "react";
+import { useAppDispatch } from "../../../store/hooks";
+import { setTotalPriceData } from "../../../store/totalPrice.slice";
 
 const CartTotalPrice: FC<{
   view?: string;
@@ -8,6 +10,7 @@ const CartTotalPrice: FC<{
   setTotalPrice?: (price: number) => void;
 }> = ({ view, shipment, setTotalPrice }) => {
   const cartItems = useAppSelector((state) => state.cart);
+  const dispatch = useAppDispatch();
 
   const getTotalPrice = () => {
     return cartItems.reduce(
@@ -21,7 +24,8 @@ const CartTotalPrice: FC<{
     if (setTotalPrice) {
       setTotalPrice(getTotalPrice() + shipment);
     }
-  }, []);
+    dispatch(setTotalPriceData({ value: getTotalPrice() }));
+  }, [cartItems]);
 
   return (
     <Price

@@ -22,6 +22,7 @@
 .title {
   font-size: 3.6rem;
   padding-bottom: 4rem;
+  font-weight: 500;
 
   @include veriables.respond(tab) {
     text-align: center;

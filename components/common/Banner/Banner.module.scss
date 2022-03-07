@@ -7,8 +7,18 @@
 
 .img {
   width: 100%;
-  height: 809px;
+  height: 400px;
   position: relative;
+  @include veriables.respond(phone) {
+    height: 350px;
+  }
+}
+
+.banner {
+  width: 100%;
+  height: 400px;
+  position: relative;
+  object-fit: cover;
   @include veriables.respond(phone) {
     height: 350px;
   }

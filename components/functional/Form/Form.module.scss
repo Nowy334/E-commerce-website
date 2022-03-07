@@ -1,0 +1,62 @@
+@use "../../../styles/veriables.scss";
+
+.form {
+  width: 60%;
+  color: #555555;
+  @include veriables.respond(netbook-min) {
+    width: 100%;
+  }
+}
+
+.group {
+  display: flex;
+  width: 100%;
+
+  .form__item:first-of-type {
+    margin-right: 3rem;
+  }
+
+  @include veriables.respond(phone) {
+    flex-direction: column;
+  }
+}
+
+.form__item {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2rem;
+  width: 100%;
+  label {
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+  }
+
+  input {
+    height: 3rem;
+    padding: 0 0.5rem 0 0.5rem;
+  }
+
+  textarea {
+    padding: 0.5rem 0.5rem 0 0.5rem;
+  }
+
+  input,
+  textarea {
+    min-width: 20rem;
+    color: #555;
+    border: none;
+    border: 1px solid #e1e1e1;
+    outline: none;
+    transition: all 0.5s ease-in;
+
+    &:focus {
+      border-color: #555;
+    }
+  }
+}
+
+.error {
+  margin-top: 0.5rem;
+  font-size: 1.4rem;
+  color: red;
+}

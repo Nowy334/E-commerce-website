@@ -1,8 +1,10 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { isMobile } from "react-device-detect";
 import { DynamicOptions } from "next/dynamic";
 import useMobile from "../../utils/useMobile";
 import Price from "../../functional/Price/Price";
+import { FiPlus } from "react-icons/fi";
+import { FiMinus } from "react-icons/fi";
 import s from "./Product.module.scss";
 
 import { useAppDispatch } from "../../../store/hooks";
@@ -15,6 +17,7 @@ const Product: FC<{ product: any }> = ({ product }) => {
   const isMobile = useMobile();
   const [quantity, setQuantity] = useState(1);
   const dispatch = useAppDispatch();
+  // const [status, setStatus] = useState(false);
 
   if (product.fields.mainPhoto) {
     images.push(product.fields.mainPhoto.fields.file.url);
@@ -24,6 +27,23 @@ const Product: FC<{ product: any }> = ({ product }) => {
       images.push(photo.fields.file.url);
     });
   }
+
+  // useEffect(() => {
+  //   const timeout = setTimeout(() => {
+  //     if (status) {
+  //       setStatus(false);
+  //     }
+  //   }, 2000);
+
+  //   return () => {
+  //     if (timeout) clearTimeout(timeout);
+  //   };
+  // }, [status]);
+
+  const handleAddToCart = () => {
+    //setStatus(true);
+    dispatch(addToCart({ product, quantity }));
+  };
 
   const changeQuantity = (operation?: string, e?: any) => {
     if (e ? e.target.value === "0" : false) {
@@ -55,7 +75,7 @@ const Product: FC<{ product: any }> = ({ product }) => {
               className={s.quantity__changer}
               onClick={() => changeQuantity("dec")}
             >
-              -
+              <FiMinus />
             </span>
             <input
               className={s.input}
@@ -69,13 +89,10 @@ const Product: FC<{ product: any }> = ({ product }) => {
               className={s.quantity__changer}
               onClick={() => changeQuantity("inc")}
             >
-              +{" "}
+              <FiPlus />
             </span>
           </div>
-          <button
-            className={s.add__cart__btn}
-            onClick={() => dispatch(addToCart({ product, quantity }))}
-          >
+          <button className={s.add__cart__btn} onClick={handleAddToCart}>
             Dodaj do koszyka
           </button>
         </div>

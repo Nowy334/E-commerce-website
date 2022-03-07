@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import Image from "next/image";
+import Image, { ImageLoaderProps } from "next/image";
 import s from "./ProductImages.module.scss";
 import LightBox from "../../ui/LightBox/LightBox";
 import Carousel from "../../ui/Carousel/Carousel";
@@ -12,6 +12,10 @@ const ProductImages: FC<{ images: string[] }> = ({ images }) => {
     setLightBoxDisplay(false);
   };
 
+  const myLoader = ({ src, width, quality }: ImageLoaderProps) => {
+    return `https:${src}?w=${width}&q=${quality || 75}`;
+  };
+
   const thumbnails = images.map((item, index) => {
     return (
       <div
@@ -22,7 +26,8 @@ const ProductImages: FC<{ images: string[] }> = ({ images }) => {
         onClick={() => setSelectedImg(item)}
       >
         <Image
-          src={`https:${item}`}
+          loader={myLoader}
+          src={item}
           alt="thumbnails"
           objectFit="cover"
           layout="fill"
@@ -37,7 +42,8 @@ const ProductImages: FC<{ images: string[] }> = ({ images }) => {
         <div className={s.thumbnails}>{thumbnails}</div>
         <div className={s.main__image}>
           <Image
-            src={`https:${selectedImg}`}
+            loader={myLoader}
+            src={selectedImg}
             alt="thumbnails"
             objectFit="contain"
             layout="fill"

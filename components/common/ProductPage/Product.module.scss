@@ -44,13 +44,15 @@
 }
 
 .quantity__changer {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   padding: 0.5rem;
   position: absolute;
   cursor: pointer;
   top: 50%;
   outline: none;
   transform: translateY(-50%);
+  display: flex;
+  align-items: center;
 
   &:first-of-type {
     left: 5px;
