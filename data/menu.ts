@@ -5,51 +5,52 @@ export const MenuItemsList: MenuItems[] = [
     name: "Home",
     path: "/",
   },
-
   {
-    name: "O nas",
-    path: "/o-nas",
+    name: "Stroje",
+    disabled: true,
+    path: "/stroje",
+    submenu: [
+      {
+        name: "Nowe stroje",
+        path: "/nowe-stroje",
+      },
+      {
+        name: "Stroje używane",
+        path: "/stroje-uzywane",
+      },
+    ],
   },
-
+  {
+    name: "Korony na kok",
+    path: "/korony-na-kok",
+  },
+  {
+    name: "Bielizna",
+    disabled: true,
+    path: "/bielizna",
+    submenu: [
+      {
+        name: "Body invisible",
+        path: "/body",
+      },
+      {
+        name: "Majtki invisible",
+        path: "/majtki-invisible",
+      },
+    ],
+  },
   {
     name: "Galeria",
     path: "/galeria",
   },
-
   {
-    name: "Na sprzedaż",
-    submenu: [
-      {
-        name: "Stroje startowe",
-        path: "/stroje-startowe",
-      },
-      {
-        name: "Ozdoby do wlosow",
-        path: "/ozdoby-do-wlosow",
-      },
-      {
-        name: "Body",
-        path: "/body",
-      },
-    ],
-    path: "/na-sprzedaz",
+    name: "O nas",
+    path: "/o-nas",
   },
-
   {
-    name: "Zamówienia",
-    submenu: [
-      {
-        name: "Złóż zamówienie",
-        path: "/",
-      },
-      {
-        name: "Sposób mierzenia",
-        path: "/sposob-mierzenia",
-      },
-    ],
-    path: "/zamowienia",
+    name: "Sposób mierzenia",
+    path: "/sposob-mierzenia",
   },
-
   {
     name: "Kontakt",
     path: "/kontakt",

@@ -1,7 +1,7 @@
 import { createClient } from "contentful";
-import { Ornament } from "../../models/ornament";
+import { Ornament } from "../../../models/ornament";
 import type { InferGetStaticPropsType } from "next";
-import Product from "../../components/common/ProductPage/Product";
+import Product from "../../../components/common/ProductPage/Product";
 
 const client = createClient({
   space: process.env.CONTENTFUL_SPACE_ID as string,
@@ -15,7 +15,7 @@ export const getStaticPaths = async () => {
 
   const paths = res.items.map((item: any) => {
     return {
-      params: { slug: item.fields.slug },
+      params: { slug: item.fields.slug, product: item.fields.color[0] },
     };
   });
 
@@ -40,6 +40,7 @@ export const getStaticProps = async ({
     props: {
       ornament: items[0],
     },
+    revalidate: 600,
   };
 };
 

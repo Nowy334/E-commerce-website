@@ -8,10 +8,11 @@ import PhotoGallery from "../../components/page/Gallery/PhotoGallery";
 
 const Gallery: NextPage = ({
   gallery,
+  mainBanner,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <>
-      <Banner title="Galeria" />
+      <Banner title="Galeria" banner={mainBanner} />
       <PhotoGallery photos={gallery.photos} />
     </>
   );
@@ -23,6 +24,7 @@ export const getStaticProps: GetStaticProps = async () => {
     accessToken: process.env.CONTENTFUL_ACCESS_KEY as string,
   });
 
+  const mainBanner = await client.getEntry("1JME2CmObaVbjo1YH0jYE7");
   const gallery = await client.getEntries({
     content_type: "image",
     limit: 200,
@@ -30,7 +32,9 @@ export const getStaticProps: GetStaticProps = async () => {
   return {
     props: {
       gallery: gallery.items[0].fields,
+      mainBanner,
     },
+    revalidate: 600,
   };
 };
 

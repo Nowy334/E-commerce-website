@@ -2,7 +2,7 @@ import { useAppSelector } from "../../../store/hooks";
 import s from "./Cart.module.scss";
 import ProductsCart from "../../common/ProductsCart/ProductsCart";
 import CartTotalPrice from "../../functional/CartTotalPrice/CartTotalPrice";
-import Button from "../../ui/Button";
+import Button from "@ui/Button/Button";
 import Shipment from "../../functional/Shipment/Shipment";
 import Price from "../../functional/Price/Price";
 
@@ -11,12 +11,13 @@ const Cart = () => {
   const totalPriceData = useAppSelector((state) => state.totalPrice);
 
   return (
-    <div className={s.root}>
+    <>
       {cartItems.length === 0 ? (
-        <h1>Twoj koszyk jest pusty!</h1>
+        <h1 className={s.empty}>Twój koszyk jest pusty!</h1>
       ) : (
         <div className={s.container}>
           <div className={s.items}>
+            <div className={s.header__title}>Zawartość Twojego koszyka</div>
             <div className={s.headers}>
               <div>Produkt</div>
               <div className={s.mobile}>Cena</div>
@@ -32,9 +33,8 @@ const Cart = () => {
                 <span>Kwota</span>
                 <CartTotalPrice />
               </div>
-              <div className={s.cart__text}>
+              <div className={s.cart__text + " " + s.cart__text_shipment}>
                 <span>Wysyłka</span>
-                <Price price={totalPriceData.shipment.price} />
               </div>
               <Shipment />
             </div>
@@ -56,7 +56,7 @@ const Cart = () => {
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 };
 

@@ -4,7 +4,7 @@ import { FC } from "react";
 import { useAppDispatch } from "../../../store/hooks";
 import { setShipmentData } from "../../../store/totalPrice.slice";
 
-const Shipment = () => {
+const Shipment: FC<{ disabled?: boolean }> = ({ disabled = false }) => {
   const shimpent = useAppSelector((state) => state.totalPrice);
   const dispatch = useAppDispatch();
 
@@ -20,6 +20,7 @@ const Shipment = () => {
             type="radio"
             value="Kurier Inpost"
             name="shipment"
+            disabled={disabled}
             checked={shimpent.shipment.type === "Kurier Inpost"}
             onChange={() => handleData("Kurier Inpost", 10)}
           />
@@ -33,6 +34,7 @@ const Shipment = () => {
             type="radio"
             value="Kurier DPD"
             name="shipment"
+            disabled={disabled}
             checked={shimpent.shipment.type === "Kurier DPD"}
             onChange={() => handleData("Kurier DPD", 9.99)}
           />
@@ -46,6 +48,7 @@ const Shipment = () => {
             type="radio"
             value="Odbiór osobisty"
             name="shipment"
+            disabled={disabled}
             checked={shimpent.shipment.type === "Odbiór osobisty"}
             onChange={() => handleData("Odbiór osobisty", 12)}
           />

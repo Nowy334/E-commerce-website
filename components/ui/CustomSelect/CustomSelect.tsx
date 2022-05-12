@@ -1,5 +1,5 @@
 import React, { FC, useCallback, useState } from "react";
-import { AnimatePresence, m } from "framer-motion";
+import { AnimatePresence, m, LazyMotion, domAnimation } from "framer-motion";
 import { presenceAnimation } from "../../../helpers/animations";
 import { GrDown } from "react-icons/gr";
 import s from "./CustomSelect.module.scss";
@@ -42,29 +42,31 @@ const CustomSelect: SelectComponent = ({
               {selectedOption}
               <GrDown />
             </div>
-            <AnimatePresence>
-              {isListOpen ? (
-                <m.div {...presenceAnimation} className={s.subjects}>
-                  <ul>
-                    {options.map((v, i) => {
-                      return v ? (
-                        <li
-                          key={i}
-                          onClick={v ? onChangeVariant(v) : undefined}
-                          className={
-                            s.item +
-                            " " +
-                            (selectedOption === v.size ? s.active : "")
-                          }
-                        >
-                          <span>{v.size}</span>
-                        </li>
-                      ) : null;
-                    })}
-                  </ul>
-                </m.div>
-              ) : null}
-            </AnimatePresence>
+            <LazyMotion features={domAnimation}>
+              <AnimatePresence>
+                {isListOpen ? (
+                  <m.div {...presenceAnimation} className={s.subjects}>
+                    <ul>
+                      {options.map((v, i) => {
+                        return v ? (
+                          <li
+                            key={i}
+                            onClick={v ? onChangeVariant(v) : undefined}
+                            className={
+                              s.item +
+                              " " +
+                              (selectedOption === v.size ? s.active : "")
+                            }
+                          >
+                            <span>{v.size}</span>
+                          </li>
+                        ) : null;
+                      })}
+                    </ul>
+                  </m.div>
+                ) : null}
+              </AnimatePresence>
+            </LazyMotion>
           </div>
         </>
       ) : null}

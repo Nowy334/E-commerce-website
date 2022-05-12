@@ -1,22 +1,22 @@
 import { FC, useEffect, useState } from "react";
-import { isMobile } from "react-device-detect";
-import { DynamicOptions } from "next/dynamic";
-import useMobile from "../../utils/useMobile";
 import Price from "../../functional/Price/Price";
 import { FiPlus } from "react-icons/fi";
 import { FiMinus } from "react-icons/fi";
 import s from "./Product.module.scss";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import { useAppDispatch } from "../../../store/hooks";
 import { addToCart } from "../../../store/cart.slice";
 
 import ProductImages from "../../functional/ProductImages/ProductImages";
+import Button from "@ui/Button/Button";
 
 const Product: FC<{ product: any }> = ({ product }) => {
   let images: string[] = [];
-  const isMobile = useMobile();
   const [quantity, setQuantity] = useState(1);
   const dispatch = useAppDispatch();
+  const notify = () => toast("Produkt dodany do koszyka!");
   // const [status, setStatus] = useState(false);
 
   if (product.fields.mainPhoto) {
@@ -43,6 +43,7 @@ const Product: FC<{ product: any }> = ({ product }) => {
   const handleAddToCart = () => {
     //setStatus(true);
     dispatch(addToCart({ product, quantity }));
+    notify();
   };
 
   const changeQuantity = (operation?: string, e?: any) => {
@@ -68,7 +69,10 @@ const Product: FC<{ product: any }> = ({ product }) => {
       <div className={s.content}>
         <div className={s.title}>{product.fields.title}</div>
         <Price price={product.fields.price} s={s.product__price} />
-        <div className={s.desc}>{product.fields.description}</div>
+        <div
+          className={s.desc}
+          dangerouslySetInnerHTML={{ __html: product.fields.description }}
+        ></div>
         <div className={s.add__cart}>
           <div className={s.input__content}>
             <span
@@ -92,11 +96,24 @@ const Product: FC<{ product: any }> = ({ product }) => {
               <FiPlus />
             </span>
           </div>
-          <button className={s.add__cart__btn} onClick={handleAddToCart}>
-            Dodaj do koszyka
-          </button>
+          <Button
+            classname={s.add__cart__btn}
+            btnText="Dodaj do koszyka"
+            onClick={handleAddToCart}
+          />
         </div>
       </div>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={2500}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </div>
   );
 };

@@ -4,7 +4,6 @@ import { useAppDispatch } from "../../../store/hooks";
 import { removeAllFromCart } from "../../../store/cart.slice";
 import { removeData } from "../../../store/form.slice";
 import { removeShipmentData } from "../../../store/totalPrice.slice";
-import { changeCompleted } from "../../../store/completed.slice";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import CartTotalPrice from "../../functional/CartTotalPrice/CartTotalPrice";
@@ -12,6 +11,8 @@ import Shipment from "../../functional/Shipment/Shipment";
 import Price from "../../functional/Price/Price";
 import Form from "../../functional/Form/Form";
 import validateForm from "../../../helpers/validator";
+import Cookie from "js-cookie";
+import Button from "@ui/Button/Button";
 
 interface cartItemsbody {
   title: string;
@@ -79,7 +80,7 @@ const Order = () => {
     };
 
     try {
-      const res = await fetch("https://test.zubek.usermd.net/api/order", {
+      const res = await fetch("/api/order", {
         method: "POST",
         headers: {
           Accept: "application/json, text/plain, */*",
@@ -88,14 +89,13 @@ const Order = () => {
         body: JSON.stringify(body),
       });
       const json = await res.json();
-      // console.log(json);
+      console.log(json);
+      Cookie.set("order", JSON.stringify(body));
       if (res.status === 200 && json.message === "success") {
         router.push({
           pathname: "/order/completed",
           query: { orderId: json.orderNumber },
         });
-        dispatch(changeCompleted({ value: true }));
-        localStorage.setItem("order", JSON.stringify(cartItems));
         dispatch(removeData());
         dispatch(removeShipmentData());
         dispatch(removeAllFromCart());
@@ -178,14 +178,22 @@ const Order = () => {
                 <div className={s.checked__info}>{noCheckedInfo}</div>
               ) : null}
             </div>
-            <button
+            {/* <button
               type="submit"
               form="hook-form"
               className={s.btn}
               disabled={!totalPriceData.shipment.type ? true : false}
             >
               Kupuje i płacę
-            </button>
+            </button> */}
+
+            <Button
+              classname={s.btn}
+              type="submit"
+              form="hook-form"
+              btnText="Kupuje i płacę"
+              disabled={!totalPriceData.shipment.type ? true : false}
+            />
           </div>
         </div>
       )}

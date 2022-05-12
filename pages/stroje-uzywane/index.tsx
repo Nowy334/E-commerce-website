@@ -9,16 +9,20 @@ export const getStaticProps: GetStaticProps = async () => {
     accessToken: process.env.CONTENTFUL_ACCESS_KEY as string,
   });
 
-  const outfits = await client.getEntries({ content_type: "product" });
+  const outfits = await client.getEntries({
+    content_type: "product",
+    "fields.secondHand": true,
+  });
 
   return {
     props: {
       outfits: outfits.items,
     },
+    revalidate: 600,
   };
 };
 
-const Outfits: NextPage = ({
+const UsedOutfits: NextPage = ({
   outfits,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
@@ -31,4 +35,4 @@ const Outfits: NextPage = ({
   );
 };
 
-export default Outfits;
+export default UsedOutfits;

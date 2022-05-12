@@ -5,7 +5,6 @@ import Body from "../../components/page/Body/Body";
 const BodyPage: NextPage = ({
   body,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  console.log(body);
   return (
     <main>
       <Body bodyItem={body}></Body>
@@ -25,6 +24,7 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       body: body.items[0],
     },
+    revalidate: 600,
   };
 };
 

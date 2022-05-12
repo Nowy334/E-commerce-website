@@ -3,6 +3,8 @@ import { InstaFeed } from "../../../models/instagram.model";
 import Item from "./Item";
 import s from "./Instagram.module.scss";
 import Link from "next/link";
+import instaLogo from "../../../public/assets/logo.png";
+import Image from "next/image";
 
 const Instagram: FC<{ instaFeed: InstaFeed[] }> = ({ instaFeed }) => {
   const InstaItems = instaFeed.map((item) => {
@@ -16,7 +18,13 @@ const Instagram: FC<{ instaFeed: InstaFeed[] }> = ({ instaFeed }) => {
         <Link href={"https://www.instagram.com/katya_rgleotards"}>
           <a className={s.link__content}>
             <div className={s.image__overlay}>
-              <img src="assets/logo.png" alt="logo" className={s.image} />
+              <Image
+                src={instaLogo}
+                objectFit="contain"
+                layout="fill"
+                alt="Instagram Katya logo"
+                unoptimized
+              />
             </div>
             <span className={s.desc}>KATYA_RGLEOTARDS</span>
           </a>

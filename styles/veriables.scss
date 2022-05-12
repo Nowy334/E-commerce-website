@@ -1,4 +1,5 @@
-$main-color: #ff3d6d;
+$main-color: #e1306c;
+$second-color: #ff3d6d;
 
 @mixin respond($breakpoint) {
   @if $breakpoint == phone {

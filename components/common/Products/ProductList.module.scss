@@ -1,4 +1,4 @@
-@use '../../../styles/veriables.scss';
+@use "../../../styles/veriables.scss";
 
 .list {
   display: grid;
@@ -6,7 +6,7 @@
   grid-template-columns: repeat(3, minmax(350px, 1fr));
   justify-content: center;
   justify-items: center;
-  grid-gap: 2rem;
+  grid-gap: 3rem;
   margin: 0 auto;
 
   @include veriables.respond(netbook) {
@@ -15,5 +15,25 @@
 
   @include veriables.respond(phone-max) {
     grid-template-columns: repeat(1, minmax(310px, 1fr));
+  }
+}
+
+.association__scroll {
+  @include veriables.respond(tab) {
+    width: 100%;
+    overflow-x: scroll;
+  }
+}
+
+.association {
+  grid-template-columns: repeat(3, 250px);
+  justify-content: start;
+  padding: 0;
+  @include veriables.respond(netbook) {
+    grid-template-columns: repeat(3, 250px);
+  }
+
+  @include veriables.respond(phone-max) {
+    grid-template-columns: repeat(3, 200px);
   }
 }

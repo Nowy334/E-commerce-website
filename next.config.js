@@ -3,12 +3,21 @@
 module.exports = {
   reactStrictMode: true,
   images: {
-    loader: 'imgix',
-    domains: [
-      "images.ctfassets.net",
-      "scontent-waw1-1.cdninstagram.com",
-      "video-waw1-1.cdninstagram.com",
-    ],
+    loader: "imgix",
+    path: ["images.ctfassets.net"],
+    domains: ["images.ctfassets.net"],
   },
-  trailingSlash: true,
+  experimental: {
+    concurrentFeatures: true,
+  },
+  swcMinify: false,
+  async redirects() {
+    return [
+      {
+        source: "/admin",
+        destination: "https://be.contentful.com/login",
+        permanent: true,
+      },
+    ];
+  },
 };

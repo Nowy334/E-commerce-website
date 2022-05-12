@@ -49,7 +49,8 @@
 
 .quantity__changer {
   font-size: 1.2rem;
-  padding: 0.5rem;
+  padding: 0.7rem;
+  height: 100%;
   position: absolute;
   cursor: pointer;
   top: 50%;
@@ -59,10 +60,12 @@
   align-items: center;
 
   &:first-of-type {
-    left: 5px;
+    left: 0;
+    border-right: 1px solid #eee;
   }
   &:last-of-type {
-    right: 5px;
+    right: 0;
+    border-left: 1px solid #eee;
   }
 }
 

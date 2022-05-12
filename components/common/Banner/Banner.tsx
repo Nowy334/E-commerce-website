@@ -1,13 +1,23 @@
-//import banner from "../../../public/assets/main_banner.jpg";
-import banner from "../../../public/assets/banner.jpg";
+import Image from "@ui/Image";
 import classes from "./Banner.module.scss";
+import { Banner as BannerType } from "@types";
 
-const Banner: React.FC<{ title?: string }> = ({ title }) => {
+const Banner: React.FC<{ title?: string; banner: BannerType }> = ({
+  title,
+  banner,
+}) => {
   return (
     <header className={classes.header}>
       <div className={classes.img}>
         <h1 className={classes.banner__title}>{title}</h1>
-        <img className={classes.banner} src={banner.src} alt="główny banner" />
+        <Image
+          customLoader={true}
+          src={banner.fields.image.fields.file.url}
+          layout="fill"
+          objectFit="cover"
+          alt="główny banner"
+          priority={true}
+        ></Image>
       </div>
     </header>
   );

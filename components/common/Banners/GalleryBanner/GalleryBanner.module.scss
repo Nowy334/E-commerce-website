@@ -1,0 +1,45 @@
+@use "../../../../styles/veriables.scss";
+
+.root {
+  display: flex;
+  flex-direction: column;
+  h2 {
+    font-size: 3.6rem;
+    text-align: center;
+    font-weight: 500;
+    padding-bottom: 4rem;
+    text-transform: uppercase;
+  }
+
+  padding-bottom: 9rem;
+}
+
+.banner__image {
+  position: relative;
+  width: 100%;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-column-gap: 2rem;
+
+  @include veriables.respond(tab) {
+    grid-template-columns: repeat(2, 1fr);
+    grid-row-gap: 2rem;
+  }
+
+  @include veriables.respond(phone-max) {
+    grid-template-columns: repeat(1, 1fr);
+    grid-row-gap: 2rem;
+  }
+}
+
+.btn {
+  margin-top: 4rem;
+  align-self: center;
+  color: white;
+  background-color: #bc3e64;
+  text-decoration: none;
+  text-transform: uppercase;
+}

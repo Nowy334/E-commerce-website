@@ -42,10 +42,12 @@
 
   input,
   textarea {
+    background-color: #f4f4f4;
+    font-family: inherit;
     min-width: 20rem;
     color: #555;
     border: none;
-    border: 1px solid #e1e1e1;
+    border: 1px solid #f4f4f4;
     outline: none;
     transition: all 0.5s ease-in;
 

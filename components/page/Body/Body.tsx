@@ -7,14 +7,16 @@ import s from "./Body.module.scss";
 import { useAppDispatch } from "../../../store/hooks";
 import { addToCart } from "../../../store/cart.slice";
 import CustomSelect from "../../ui/CustomSelect/CustomSelect";
-import Image, { ImageLoaderProps } from "next/image";
+import Image from "@ui/Image";
 
 const Body: FC<{ bodyItem: any }> = ({ bodyItem }) => {
   //   const item = {...bodyItem};
   const [quantity, setQuantity] = useState(1);
   const dispatch = useAppDispatch();
-  const [selectSize, setSelectSize] =
-    useState<{ size: string; price: number }>();
+  const [selectSize, setSelectSize] = useState<{
+    size: string;
+    price: number;
+  }>();
 
   const handleSelectOption = (v: any) => {
     setSelectSize(v);
@@ -46,15 +48,11 @@ const Body: FC<{ bodyItem: any }> = ({ bodyItem }) => {
     }
   };
 
-  const myLoader = ({ src, width, quality }: ImageLoaderProps) => {
-    return `https:${src}?w=${width}&q=${quality || 75}`;
-  };
-
   return (
     <div className={s.root}>
       <div className={s.image}>
         <Image
-          loader={myLoader}
+          customLoader={true}
           src={bodyItem.fields.mainPhoto.fields.file.url}
           alt="thumbnails"
           objectFit="contain"

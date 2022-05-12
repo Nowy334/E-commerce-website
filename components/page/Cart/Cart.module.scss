@@ -1,10 +1,21 @@
 @use "../../../styles/veriables.scss";
+
 .container {
   display: flex;
   align-items: flex-start;
+  margin-top: 2rem;
   @include veriables.respond(netbook-min) {
     flex-direction: column;
   }
+}
+
+.empty {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: veriables.$main-color;
+  font-size: 2rem;
 }
 
 .mobile {
@@ -40,6 +51,11 @@
   border-bottom: 1px solid #eee;
 }
 
+.header__title {
+  font-size: 3rem;
+  margin-bottom: 4rem;
+}
+
 .total__price {
   font-size: 1.5rem;
 }
@@ -47,7 +63,7 @@
 .summary {
   margin-left: 4rem;
   flex: 1;
-  border: 2px solid #000;
+  border: 2px solid #eee;
   padding: 2rem;
 
   @include veriables.respond(netbook-min) {
@@ -67,6 +83,8 @@
   padding-top: 2rem;
   display: flex;
   flex-direction: column;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 2rem;
 }
 
 .cart__text {
@@ -74,10 +92,20 @@
   display: flex;
   margin-bottom: 2rem;
   justify-content: space-between;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #eee;
+
+  &_shipment {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
 }
 
 .btn {
   width: 100%;
+  color: white;
+  background-color: black;
 
   &.disabled {
     pointer-events: none;

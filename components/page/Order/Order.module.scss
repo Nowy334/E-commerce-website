@@ -7,7 +7,7 @@
 .summary {
   margin-left: 4rem;
   flex: 1;
-  border: 2px solid #000;
+  border: 2px solid #eee;
   padding: 2rem;
 
   @include veriables.respond(netbook-min) {
@@ -47,7 +47,6 @@
   border: none;
   cursor: pointer;
   background-color: #000;
-  //background-color: #ff3d6d;
   text-decoration: none;
   font-weight: 500;
   color: white;
@@ -58,7 +57,7 @@
   overflow: hidden;
 
   &:hover {
-    background-color: #ff3d6d;
+    background-color: veriables.$main-color;
   }
 
   &:active {

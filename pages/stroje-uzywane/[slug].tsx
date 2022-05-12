@@ -10,6 +10,7 @@ const client = createClient({
 export const getStaticPaths = async () => {
   const res = await client.getEntries({
     content_type: "product",
+    "fields.secondHand": true,
   });
 
   const paths = res.items.map((item: any) => {
@@ -32,6 +33,7 @@ export const getStaticProps = async ({
 }) => {
   const { items } = await client.getEntries({
     content_type: "product",
+    "fields.secondHand": true,
     "fields.slug": params.slug,
   });
 
@@ -39,6 +41,7 @@ export const getStaticProps = async ({
     props: {
       outfit: items[0],
     },
+    revalidate: 600,
   };
 };
 

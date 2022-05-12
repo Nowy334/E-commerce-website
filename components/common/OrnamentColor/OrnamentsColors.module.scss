@@ -1,0 +1,54 @@
+@use "../../../styles/veriables.scss";
+
+.root {
+  list-style: none;
+}
+
+.list {
+  display: grid;
+  padding: 0 7.2rem;
+  grid-template-columns: repeat(3, minmax(350px, 1fr));
+  justify-content: center;
+  justify-items: center;
+  grid-gap: 3rem;
+  margin: 0 auto;
+
+  @include veriables.respond(netbook) {
+    grid-template-columns: repeat(2, minmax(310px, 1fr));
+  }
+
+  @include veriables.respond(phone-max) {
+    grid-template-columns: repeat(1, minmax(310px, 1fr));
+  }
+}
+
+.product__image {
+  position: relative;
+  width: 350px;
+  height: 350px;
+  font-size: 1rem;
+
+  @include veriables.respond(netbook) {
+    width: 300px;
+    height: 300px;
+  }
+}
+
+.product__content {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+}
+
+.product__title {
+  padding: 2rem 0;
+  font-size: 1.7rem;
+  color: #000;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.product__link {
+  text-decoration: none;
+}

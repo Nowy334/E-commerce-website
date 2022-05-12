@@ -1,25 +1,29 @@
 import { FC } from "react";
 import Link from "next/link";
-import Image, { ImageLoaderProps } from "next/image";
 import s from "./ProductsCart.module.scss";
 import { useAppDispatch } from "../../../store/hooks";
 import { removeFromCart } from "../../../store/cart.slice";
 import Price from "../../functional/Price/Price";
 import InputQuantity from "../../functional/InputQuantity/InputQuantity";
+import Image from "@ui/Image";
 
-const ProductsCart: FC<{ products: any }> = ({ products }) => {
+const ProductsCart: FC<{ products: any; completed?: boolean }> = ({
+  products,
+  completed = false,
+}) => {
   const dispatch = useAppDispatch();
-  const myLoader = ({ src, width, quality }: ImageLoaderProps) => {
-    return `https:${src}?w=${width}&q=${quality || 75}`;
-  };
 
   const getUrl = (item: any) => {
     if (item.sys.contentType.sys.id === "ornaments") {
-      return `ozdoby-do-wlosow/${item.fields.slug}`;
+      return `korony-na-kok/${item.fields.color}/${item.fields.slug}`;
     } else if (item.sys.contentType.sys.id === "body") {
       return `/body`;
+    } else if (item.fields.secondHand === true) {
+      return `/stroje-uzywane/${item.fields.slug}`;
+    } else if (item.fields.secondHand === false) {
+      return `/nowe-stroje/${item.fields.slug}`;
     } else {
-      return `stroje-startowe/${item.fields.slug}`;
+      return "";
     }
   };
 
@@ -32,9 +36,9 @@ const ProductsCart: FC<{ products: any }> = ({ products }) => {
               <Link href={getUrl(item)} passHref={true}>
                 <div className={s.product__image}>
                   <Image
-                    loader={myLoader}
+                    customLoader={true}
                     src={item.fields.mainPhoto.fields.file.url}
-                    alt="główny banner"
+                    alt={item.fields.mainPhoto.fields.title}
                     objectFit="cover"
                     layout="fill"
                   ></Image>

@@ -3,8 +3,9 @@ export interface SubMenu {
   path: string;
 }
 
-export default interface MenuItem{
-  name:string;
+export default interface MenuItem {
+  name: string;
   submenu?: SubMenu[];
   path: string;
+  disabled?: boolean;
 }

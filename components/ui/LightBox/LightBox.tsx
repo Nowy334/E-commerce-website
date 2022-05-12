@@ -1,7 +1,7 @@
-import Image, { ImageLoaderProps } from "next/image";
 import { useState } from "react";
 import { FC } from "react";
 import s from "./LightBox.module.scss";
+import Image from "@ui/Image";
 
 const LightBox: FC<{
   image: string;
@@ -58,10 +58,6 @@ const LightBox: FC<{
     setTouchPosition(null);
   };
 
-  const myLoader = ({ src, width, quality }: ImageLoaderProps) => {
-    return `https:${src}?w=${width}&q=${quality || 75}`;
-  };
-
   return (
     <div
       className={s.lightbox}
@@ -72,7 +68,7 @@ const LightBox: FC<{
       <div className={s.prev + " " + s.arrow} onClick={showPrev}></div>
       <div className={s.lightbox__image}>
         <Image
-          loader={myLoader}
+          customLoader={true}
           src={imageToShow}
           alt="thumbnails"
           objectFit="contain"

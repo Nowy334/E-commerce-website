@@ -3,8 +3,8 @@ import logo from "../../../public/assets/logo.png";
 import { MenuItemsList } from "../../../data/menu";
 import MenuItem from "./MenuItem";
 import { useState, useRef, useEffect } from "react";
-import { BsFacebook, BsInstagram } from "react-icons/Bs";
-import { CgShoppingCart } from "react-icons/Cg";
+import { BsFacebook, BsInstagram } from "react-icons/bs";
+import { CgShoppingCart } from "react-icons/cg";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 
@@ -61,6 +61,7 @@ const Navbar = () => {
                 key={index}
                 name={item.name}
                 path={item.path}
+                disabled={item.disabled}
                 submenu={item.submenu}
                 isActive={active}
                 onCloseMenu={onCloseMenu}
@@ -76,6 +77,7 @@ const Navbar = () => {
             (active ? classes["hamburger--active"] : "")
           }
           onClick={activeHamburger}
+          aria-label="hamburger"
         >
           <span className={classes.hamburger__box}>
             <span className={classes.hamburger__inner}></span>

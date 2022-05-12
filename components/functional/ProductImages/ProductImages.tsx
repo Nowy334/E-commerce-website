@@ -1,8 +1,8 @@
 import { FC, useState } from "react";
-import Image, { ImageLoaderProps } from "next/image";
 import s from "./ProductImages.module.scss";
 import LightBox from "../../ui/LightBox/LightBox";
 import Carousel from "../../ui/Carousel/Carousel";
+import Image from "@ui/Image";
 
 const ProductImages: FC<{ images: string[] }> = ({ images }) => {
   const [selectedImg, setSelectedImg] = useState(images[0]);
@@ -10,10 +10,6 @@ const ProductImages: FC<{ images: string[] }> = ({ images }) => {
 
   const hideLightBox = () => {
     setLightBoxDisplay(false);
-  };
-
-  const myLoader = ({ src, width, quality }: ImageLoaderProps) => {
-    return `https:${src}?w=${width}&q=${quality || 75}`;
   };
 
   const thumbnails = images.map((item, index) => {
@@ -26,11 +22,12 @@ const ProductImages: FC<{ images: string[] }> = ({ images }) => {
         onClick={() => setSelectedImg(item)}
       >
         <Image
-          loader={myLoader}
+          customLoader={true}
           src={item}
           alt="thumbnails"
           objectFit="cover"
           layout="fill"
+          priority={true}
         />
       </div>
     );
@@ -40,14 +37,14 @@ const ProductImages: FC<{ images: string[] }> = ({ images }) => {
     <>
       <div className={s.container}>
         <div className={s.thumbnails}>{thumbnails}</div>
-        <div className={s.main__image}>
+        <div className={s.main__image} onClick={() => setLightBoxDisplay(true)}>
           <Image
-            loader={myLoader}
+            customLoader={true}
             src={selectedImg}
             alt="thumbnails"
             objectFit="contain"
             layout="fill"
-            onClick={() => setLightBoxDisplay(true)}
+            priority={true}
           ></Image>
         </div>
       </div>

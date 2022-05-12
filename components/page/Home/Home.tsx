@@ -1,50 +1,46 @@
 import Banner from "../../common/Banner/Banner";
-import Link from "next/link";
-import { useRouter } from "next/router";
 import classes from "./Home.module.scss";
-
-import { MainPageBanner } from "../../../models/mainPageBanner.model";
-import BannerMainPage from "../../common/BannerMainPage/BannerMainPage";
 import Instagram from "../../functional/Instagram/Instagram";
 import { InstaFeed } from "../../../models/instagram.model";
+import Associations from "./Associations";
+import BodyBanner from "../../common/Banners/BodyBanner/BodyBanner";
+import { Banner as BannerType } from "../../../types/types";
+import GalleryBanner from "../../common/Banners/GalleryBanner/GalleryBanner";
 
-const Home: React.FC<{ banners: any; instaFeed: InstaFeed[] }> = ({
+const Home: React.FC<{
+  banners: any;
+  instaFeed: InstaFeed[];
+  ornamentAssociation: any;
+  bodyBanner: any;
+  projectsBanner: BannerType;
+  mainbanner: BannerType;
+}> = ({
   banners,
   instaFeed,
+  ornamentAssociation,
+  bodyBanner,
+  projectsBanner,
+  mainbanner,
 }) => {
-  //const router = useRouter();
-
-  const mainBanners = banners
-    .sort((a: any, b: any) => {
-      return a.fields.position - b.fields.position;
-    })
-    .map(({ fields }: { fields: MainPageBanner }, index: number) => {
-      let bannerObj: MainPageBanner;
-      bannerObj = {
-        image: fields.image,
-        title: fields.title,
-        description: fields.description,
-        path: fields.path,
-        buttonName: fields.buttonName,
-      };
-      return (
-        <BannerMainPage
-          banner={bannerObj}
-          order={index % 2 === 1 ? true : false}
-          key={index}
-        />
-      );
-    });
   return (
     <>
-      <Banner title={"Home"} />
+      <Banner title={"Home"} banner={mainbanner} />
       <main className={classes.main}>
-        {mainBanners}
+        <div className={classes.header}>
+          <h1>KATYA RG LEOTARDS</h1>
+          <p>
+            Specjalizujemy się w spełnianiu marzeń o pięknych i oryginalnych
+            strojach startowych do gimnastyki artystycznej, akrobatyki
+            powietrznej oraz łyżwiarstwa figurowego. Wieloletnie doświadczenie
+            pozwala spełnić niemal każde Państwa życzenie.
+          </p>
+        </div>
+        <Associations association={ornamentAssociation} type={"ozdoby"} />
+        <BodyBanner banner={bodyBanner} />
+        <GalleryBanner banner={projectsBanner} />
+
         <Instagram instaFeed={instaFeed} />
       </main>
-      {/* <Link href="/" locale={router.locale === "pl" ? "en" : "pl"}>
-        <button>zmien jezyk</button>
-      </Link> */}
     </>
   );
 };

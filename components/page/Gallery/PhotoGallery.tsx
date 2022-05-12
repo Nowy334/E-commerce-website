@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
 import s from "./PhotoGallery.module.scss";
-import Image, { ImageLoaderProps } from "next/image";
 import LightBox from "../../ui/LightBox/LightBox";
+import Image from "@ui/Image";
 
 const PhotoGallery: FC<{ photos?: any }> = ({ photos }) => {
   let images: string[] = [];
@@ -23,20 +23,21 @@ const PhotoGallery: FC<{ photos?: any }> = ({ photos }) => {
     setSelectedImg(item);
   };
 
-  const myLoader = ({ src, width, quality }: ImageLoaderProps) => {
-    return `https:${src}?w=${width}&q=${quality || 75}`;
-  };
-
   const gallery = photos.map((item: any, index: number) => {
     return (
-      <div className={s.image} key={index}>
+      <div
+        className={s.image}
+        key={index}
+        onClick={() => handleImage(item.fields.file.url)}
+      >
         <Image
-          loader={myLoader}
+          customLoader={true}
           src={item.fields.file.url}
           alt={item.fields.title}
           objectFit="cover"
           layout="fill"
-          onClick={() => handleImage(item.fields.file.url)}
+          blurDataURL={item.fields.file.url}
+          placeholder="blur"
         ></Image>
       </div>
     );

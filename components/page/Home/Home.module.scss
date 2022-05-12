@@ -7,3 +7,20 @@
     padding: 0 2rem;
   }
 }
+
+.header {
+  text-align: center;
+  padding-bottom: 9rem;
+  h1 {
+    font-size: 3.6rem;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  p {
+    font-size: 1.8rem;
+    color: #555;
+    line-height: 1.5;
+    margin-top: 2rem;
+  }
+}

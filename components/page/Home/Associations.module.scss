@@ -1,0 +1,64 @@
+@use "../../../styles/veriables.scss";
+
+.root {
+  padding-bottom: 9rem;
+  display: flex;
+  align-items: center;
+  position: relative;
+
+  @include veriables.respond(netbook) {
+    flex-direction: column;
+  }
+}
+
+.desc {
+  min-height: 100px;
+  margin-bottom: 4rem;
+  max-width: 50rem;
+
+  &::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: -5rem;
+    right: 10%;
+    display: block;
+    width: 40rem;
+    height: 40rem;
+    background-color: rgba(255, 5, 74, 0.17);
+  }
+}
+
+.container {
+  font-size: 2rem;
+  margin-left: 2rem;
+  text-align: center;
+  height: 100%;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  h2 {
+    font-size: 3.6rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    padding-bottom: 3rem;
+  }
+
+  @include veriables.respond(netbook) {
+    margin-top: 2rem;
+    margin-left: 0;
+  }
+}
+
+.btn {
+  text-transform: uppercase;
+  color: white;
+  text-decoration: none;
+  background-color: #857e7e;
+
+  @include veriables.respond(phone-max) {
+    font-size: 1.5rem;
+  }
+}

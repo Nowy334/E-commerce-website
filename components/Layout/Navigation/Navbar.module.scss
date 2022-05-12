@@ -22,18 +22,15 @@
 }
 
 .logo {
-  @include veriables.respond(tab) {
+  @include veriables.respond(netbook-min) {
     margin-right: auto;
     width: 9rem;
   }
-  width: 10rem;
+  width: 18rem;
   padding-left: 2rem;
 
-  @include veriables.respond(tab) {
-    width: 9rem;
-  }
-
-  @include veriables.respond(phone) {
+  @include veriables.respond(netbook) {
+    width: 11rem;
   }
 }
 
@@ -44,7 +41,7 @@
   background-color: #fff;
   transform: translateX(0);
 
-  @include veriables.respond(tab) {
+  @include veriables.respond(netbook-min) {
     display: flex;
     position: absolute;
     top: 9rem;
@@ -73,7 +70,7 @@
   border: 0;
   margin: 0;
 
-  @include veriables.respond(tab) {
+  @include veriables.respond(netbook-min) {
     display: inline-block;
   }
 }
@@ -167,7 +164,7 @@
 
   &__insta {
     transition: fill 0.3s 0.1s ease-in-out;
-    fill: #e1306c;
+    fill: veriables.$main-color;
     &:hover {
       fill: #000;
     }
@@ -175,7 +172,7 @@
 
   &__cart {
     transition: color 0.3s 0.1s ease-in-out;
-    color: #e1306c;
+    color: veriables.$main-color;
     @include veriables.respond(phone) {
       display: block;
     }
@@ -197,5 +194,5 @@
   transition: color 0.3s 0.1s ease-in-out;
   font-size: 1.4rem;
   font-weight: 700;
-  color: #e1306c;
+  color: veriables.$main-color;
 }

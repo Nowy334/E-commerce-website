@@ -1,0 +1,63 @@
+@use "../../../../styles/veriables.scss";
+
+.form {
+  width: 100%;
+  color: #555555;
+}
+
+.form__item {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2rem;
+  width: 100%;
+  label {
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+  }
+
+  input {
+    height: 3rem;
+    padding: 0 0.5rem 0 0.5rem;
+  }
+
+  textarea {
+    padding: 0.5rem 0.5rem 0 0.5rem;
+  }
+
+  input,
+  textarea {
+    background-color: #f4f4f4;
+    font-family: inherit;
+    min-width: 20rem;
+    color: #555;
+    border: none;
+    border: 1px solid #f4f4f4;
+    outline: none;
+    transition: all 0.5s ease-in;
+
+    &:focus {
+      border-color: #555;
+    }
+  }
+}
+
+.error {
+  margin-top: 0.5rem;
+  font-size: 1.4rem;
+  color: red;
+}
+
+.btn {
+  border: 1px solid veriables.$main-color;
+  padding: 1rem 2rem;
+  background-color: veriables.$main-color;
+  color: white;
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    border-color: black;
+    background-color: transparent;
+    color: black;
+  }
+}

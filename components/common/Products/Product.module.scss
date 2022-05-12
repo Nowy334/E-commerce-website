@@ -15,6 +15,22 @@
   }
 }
 
+.association__image {
+  position: relative;
+  width: 250px;
+  height: 250px;
+
+  @include veriables.respond(netbook) {
+    width: 250px;
+    height: 250px;
+  }
+
+  @include veriables.respond(phone-max) {
+    width: 200px;
+    height: 200px;
+  }
+}
+
 .product__content {
   display: flex;
   flex-direction: column;
@@ -37,4 +53,5 @@
 
 .product__link {
   text-decoration: none;
+  position: relative;
 }

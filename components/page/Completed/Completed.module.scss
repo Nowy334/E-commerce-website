@@ -1,0 +1,153 @@
+@use "../../../styles/veriables.scss";
+
+.container {
+  display: flex;
+
+  @include veriables.respond(netbook-min) {
+    flex-direction: column;
+  }
+}
+
+.summary__order {
+  font-size: 1.5rem;
+  width: 60%;
+
+  @include veriables.respond(netbook-min) {
+    width: 100%;
+  }
+}
+
+.summary__info {
+  display: flex;
+  flex-direction: column;
+
+  span {
+    &:first-of-type {
+      padding: 0;
+    }
+    padding: 0.4rem 0;
+  }
+}
+
+.inline {
+  display: inline;
+}
+
+.price {
+  b {
+    margin-left: 3px;
+  }
+}
+
+.summary__title {
+  font-size: 1.5rem;
+  margin-left: 4rem;
+  @include veriables.respond(netbook-min) {
+    margin-left: 0;
+  }
+}
+
+.list__items {
+  margin-top: 2rem;
+  margin-left: 4rem;
+  @include veriables.respond(netbook-min) {
+    margin-left: 0;
+  }
+}
+
+.cart__item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid #eee;
+
+  @include veriables.respond(netbook-min) {
+    max-width: 300px;
+  }
+
+  &:last-of-type {
+    border-bottom: none;
+  }
+
+  & > div {
+    &:first-of-type {
+      flex: 2;
+      justify-content: flex-start;
+    }
+    flex: 1;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.product__image {
+  position: relative;
+  width: 100px;
+  height: 100px;
+}
+
+.content__wrapper {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.5rem;
+  margin-left: 1rem;
+  padding: 0.5rem 0;
+}
+
+.product__properties {
+  font-size: 1.3rem;
+  padding: 1rem 0;
+  color: #888;
+}
+
+.data {
+  font-size: 1.5rem;
+  @include veriables.respond(netbook-min) {
+    display: none !important;
+  }
+}
+
+.mobile {
+  display: flex;
+  font-size: 1.3rem;
+  color: #888;
+}
+
+.quantity__mobile {
+  margin-right: 4px;
+}
+
+.product__content {
+  min-width: 200px;
+}
+
+.space {
+  margin-top: 2rem;
+  padding: 0 !important;
+
+  &__small {
+    margin-top: 0.5rem;
+  }
+}
+
+.order {
+  @include veriables.respond(netbook-min) {
+    margin-top: 3rem;
+  }
+}
+
+.desktop {
+  display: block;
+  @include veriables.respond(netbook-min) {
+    display: none;
+  }
+}
+
+.isMobile {
+  display: none;
+  @include veriables.respond(netbook-min) {
+    display: block;
+  }
+}

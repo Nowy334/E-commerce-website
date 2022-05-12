@@ -3,14 +3,14 @@ import cartReducer from "./cart.slice";
 import { loadState } from "./browser-storage";
 import formReducer from "./form.slice";
 import totalPriceSlice from "./totalPrice.slice";
-import completedSlice from "./completed.slice";
+import snippetsSlice from "./snippets.slice";
 
 const store = configureStore({
   reducer: {
     cart: cartReducer,
     form: formReducer,
     totalPrice: totalPriceSlice,
-    completed: completedSlice,
+    snippets: snippetsSlice,
   },
   preloadedState: loadState(),
 });

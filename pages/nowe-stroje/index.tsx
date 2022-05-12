@@ -9,27 +9,30 @@ export const getStaticProps: GetStaticProps = async () => {
     accessToken: process.env.CONTENTFUL_ACCESS_KEY as string,
   });
 
-  const ornaments = await client.getEntries({ content_type: "ornaments" });
+  const outfits = await client.getEntries({
+    content_type: "product",
+    "fields.secondHand": false,
+  });
 
   return {
     props: {
-      ornaments: ornaments.items,
+      outfits: outfits.items,
     },
+    revalidate: 600,
   };
 };
 
-const Ornaments: NextPage = ({
-  ornaments,
+const NewOutfits: NextPage = ({
+  outfits,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  console.log(ornaments);
   return (
     <>
-      <Header title={"Korony na kok"} />
+      <Header title={"Stroje startowe"} />
       <main>
-        <ProductsList products={ornaments} type="ozdoby" />
+        <ProductsList products={outfits} type="stroje" />
       </main>
     </>
   );
 };
 
-export default Ornaments;
+export default NewOutfits;

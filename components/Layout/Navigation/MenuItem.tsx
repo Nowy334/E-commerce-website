@@ -9,8 +9,9 @@ const MenuItems: React.FC<{
   path: string;
   submenu: SubMenu[] | undefined;
   isActive: boolean;
+  disabled?: boolean;
   onCloseMenu: (arg: boolean) => void;
-}> = ({ name, path, submenu, isActive, onCloseMenu }) => {
+}> = ({ name, path, submenu, isActive, onCloseMenu, disabled = false }) => {
   const [active, setActive] = useState(false);
   const [innerWidth, setInnerWidth] = useState<number>();
   const router = useRouter();
@@ -48,7 +49,13 @@ const MenuItems: React.FC<{
   });
 
   const menuElemnt = (
-    <a className={router.pathname === path ? classes.active : ""}>
+    <a
+      className={
+        (disabled ? classes.disabled : null) +
+        " " +
+        (router.pathname === path ? classes.active : "")
+      }
+    >
       {name}
       {submenu ? (
         <div className={classes.arrow__wrapper}>
@@ -80,7 +87,7 @@ const MenuItems: React.FC<{
         (submenu ? classes.submenu : "")
       }
     >
-      {submenu ? menuElemnt : <Link href={path}>{menuElemnt}</Link>}
+      {<Link href={path}>{menuElemnt}</Link>}
       {submenu ? (
         <ul className={classes.dropdown + " " + (active ? classes.on : "")}>
           {sub}

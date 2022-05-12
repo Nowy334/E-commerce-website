@@ -12,14 +12,17 @@ const validateForm = (formItems: any) => {
   };
   let postCodeRegex = /[0-9]{2}-[0-9]{3}/;
 
-  if (!validator.isEmail(formItems.email)) {
+  if (formItems.email && !validator.isEmail(formItems.email)) {
     data.email = true;
   }
-  if (!validator.isMobilePhone(formItems.phoneNumber)) {
+  if (
+    formItems.phoneNumber &&
+    !validator.isMobilePhone(formItems.phoneNumber)
+  ) {
     data.phone = true;
   }
 
-  if (!postCodeRegex.test(formItems.postcode)) {
+  if (formItems.postcode && !postCodeRegex.test(formItems.postcode)) {
     data.postcode = true;
   }
 
