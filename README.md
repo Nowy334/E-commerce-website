@@ -1,9 +1,9 @@
 ## E-commerce website for Katya RG Leotards
 
-– This is a fullstack application
-– Frontend technologies: `Next.js`, `Typescript` `Redux Toolkit`, `scss`
-– Backend technologies: `Next.js api (node.js)`, `mongodb`
-– Data for the website is taken from `headless cms contentful`
+– This is a fullstack application </br>
+– Frontend technologies: `Next.js`, `Typescript` `Redux Toolkit`, `scss`</br>
+– Backend technologies: `Next.js api (node.js)`, `mongodb`</br>
+– Data for the website is taken from `headless cms contentful`</br>
 
 As part of this application, the integration with instagram api has also been added and the server has a script that periodically refreshes the token.
 
