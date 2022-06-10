@@ -53,14 +53,14 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     client = new Email(req.body.email, clientMessage);
 
     toMeMessage = replaceTemplate(req.body, tempOur);
-    me = new Email("chrisfrompolish@gmail.com", toMeMessage);
+    me = new Email(process.env.ME_EMAIL as string, toMeMessage);
   } else if (req.body.code === "measures") {
     title = "wymiary";
     clientMessage = replaceTemplate(req.body, tempMeasureClient, true);
     client = new Email(req.body.email, clientMessage);
 
     toMeMessage = replaceTemplate(req.body, tempMeasureOur, true);
-    me = new Email("chrisfrompolish@gmail.com", toMeMessage);
+    me = new Email(process.env.ME_EMAIL as string, toMeMessage);
   }
 
   //let info, secondInfo;

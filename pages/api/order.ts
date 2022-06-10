@@ -107,7 +107,7 @@ const sendEmail = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const client = new Email(req.body.form.email, clientMessage, mailAttachments);
   const me = new Email(
-    "22krzysztofify89@gmail.com",
+    process.env.ME_EMAIL as string,
     toMeMessage,
     mailAttachments.slice(1)
   );

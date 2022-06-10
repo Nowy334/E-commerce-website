@@ -7,7 +7,7 @@ class Email {
   attachments: any;
 
   constructor(to: string, template: string, attachments?: any) {
-    this.from = "zamowienia@katya-rg.eu";
+    this.from = process.env.ORDER_EMAIL as string;
     this.to = to;
     this.template = template;
     this.attachments = attachments;
@@ -16,9 +16,9 @@ class Email {
   createTransport() {
     return nodemailer.createTransport({
       port: 465,
-      host: "mail54.mydevil.net",
+      host: process.env.HOST,
       auth: {
-        user: "zamowienia@katya-rg.eu",
+        user: process.env.ORDER_EMAIL as string,
         pass: process.env.EMAIL_PASSWORD,
       },
       secure: true,
