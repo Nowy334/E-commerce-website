@@ -1,34 +1,25 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## E-commerce website for Katya RG Leotards
 
-## Getting Started
+– This is a fullstack application.
+– Frontend technologies: `Next.js`, `Typescript` `Redux Toolkit`, `scss`.
+– Backend technologies: `Next.js api (node.js)`, `mongodb`
+– Data for the website is taken from `headless cms contentful`
 
-First, run the development server:
+As part of this application, the integration with instagram api has also been added and the server has a script that periodically refreshes the token.
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+There is also a dedicated mobile application for the store where the owner of the store can view the orders. The application fetch data from the database and notifications are handled through integration with `Firebase Cloud Messages`.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Main functionalities of the application:
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+- adding products to the cart
+- instagram insight
+- the possibility of managing the store through headless cms
+- placing orders
+- sending e-mails with orders
+- adding orders to the database
+- sharing data with the use of json web token to a mobile application
+- and more ...
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+Website is currently hosted here [https://next2.zubek.usermd.net/](https://next2.zubek.usermd.net/)
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+The application is constantly being developed and will soon be in production.

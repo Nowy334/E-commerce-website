@@ -60,10 +60,11 @@ export const getServerSideProps: GetServerSideProps = async () => {
     );
     data = await res.json();
   } catch (err) {}
-  const filterInstaFeed = data.data.filter(
-    (item: any) => item.media_type != "VIDEO"
-  );
-  const instaFeed = filterInstaFeed.slice(0, 4);
+
+  const filterInstaFeed = data.data
+    ? data.data.filter((item: any) => item.media_type != "VIDEO")
+    : null;
+  const instaFeed = filterInstaFeed ? filterInstaFeed.slice(0, 4) : [];
 
   return {
     props: {
