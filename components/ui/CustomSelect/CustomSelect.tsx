@@ -1,7 +1,7 @@
 import React, { FC, useCallback, useState } from "react";
 import { AnimatePresence, m, LazyMotion, domAnimation } from "framer-motion";
 import { presenceAnimation } from "../../../helpers/animations";
-import { GrDown } from "react-icons/Gr";
+import { GrDown } from "react-icons/gr";
 import s from "./CustomSelect.module.scss";
 
 export type SelectProps = {
