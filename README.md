@@ -1,7 +1,7 @@
 ## E-commerce website for Katya RG Leotards
 
-– This is a fullstack application.
-– Frontend technologies: `Next.js`, `Typescript` `Redux Toolkit`, `scss`.
+– This is a fullstack application
+– Frontend technologies: `Next.js`, `Typescript` `Redux Toolkit`, `scss`
 – Backend technologies: `Next.js api (node.js)`, `mongodb`
 – Data for the website is taken from `headless cms contentful`
 
