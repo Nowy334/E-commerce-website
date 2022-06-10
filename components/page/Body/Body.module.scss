@@ -4,6 +4,16 @@
   display: flex;
   justify-content: center;
   padding: 0 2rem;
+  flex-direction: column;
+
+  @include veriables.respond(tab) {
+    padding: 0;
+  }
+}
+
+.container {
+  display: flex;
+  justify-content: center;
   @include veriables.respond(tab) {
     flex-direction: column;
   }
@@ -86,6 +96,7 @@
 
 .add__cart {
   display: flex;
+  align-items: center;
   padding-top: 4rem;
 }
 
@@ -93,7 +104,7 @@
   border: none;
   background-color: #000;
   color: #fff;
-  padding: 1rem 4rem;
+  padding: 1.1rem 4rem;
   cursor: pointer;
 }
 
@@ -108,8 +119,12 @@
     max-width: 500px;
   }
 
+  @include veriables.respond(phone) {
+    height: 400px;
+  }
+
   @media (max-width: 500px) {
-    height: 500px;
+    height: 400px;
   }
 }
 
@@ -142,4 +157,32 @@
   font-size: 2rem;
   padding-top: 1.7rem;
   padding-bottom: 1rem;
+}
+
+.gallery {
+  margin-top: 8rem;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 3rem;
+
+  @include veriables.respond(netbook-min) {
+    flex-direction: column;
+  }
+
+  &__image {
+    position: relative;
+    width: 400px;
+    height: 540px;
+    transition: transform 0.3s ease-in-out;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+
+    @include veriables.respond(phone) {
+      width: 100%;
+      height: 400px;
+    }
+  }
 }

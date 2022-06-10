@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email</title>
+</head>
+<body>
+    <h2 style="color:#e1306c; border-bottom: 1px dashed black;">Nowe zamówienie {%ORDERNUMBER%}</h2>
+    <h3>Dane do zamówienia</h3>
+  <p>Numer zamówienia: {%ORDERNUMBER%}</p>
+  <p>Data złożenia: {%DATE%}</p>
+  <p>Osoba zamawiająca: {%FIRSTNAME%} {%LASTNAME%}</p>
+  <p>Telefon kontaktowy: {%PHONENUMBER%}</p>
+  <p>Email kontaktowy: {%EMAIL%}</p>
+  <p>Uwagi do zamówienia: {%COMMENTS%} </p>
+  <h3>Podsumowanie zamówienia</h3>
+  <table style="border-collapse: collapse;">
+      <tr>
+          <th style="border:1px solid"></th>
+          <th style="border:1px solid">Nazwa</th>
+          <th style="border:1px solid">Ilość</th>
+          <th style="border:1px solid">Cena</th>
+        </tr>
+        {%TABLE%}
+        <tr style="border-left: none;">
+          <td></td>
+          <td colspan="2" style="text-align: end; padding: 8px 0; padding-right: 8px">Dostawa: {%SHIPMENTTYPE%}</td>
+          <td style="border:1px solid; text-align: center; border-bottom: none;">{%SHIPMENTPRICE%} zł</td>
+        </tr>
+        <tr style="border-bottom: none; border-left: none;">
+          <td></td>
+          <td style="text-align: end; padding: 8px 0; padding-right: 8px" colspan="2">Całkowita wartość zamówienia:</td>
+          <td style="border:1px solid; text-align: center;">{%PRICE%} zł</td>
+        </tr>
+  </table>
+
+  <h3>Dane adresowe</h3>
+  <p>{%FIRSTNAME%} {%LASTNAME%}</p>
+  <p>{%STREET%}</p>
+  <p>{%POSTCODE%} {%CITY%}</p>
+  <p>Tel. {%PHONENUMBER%}</p>
+    
+</body>
+</html>

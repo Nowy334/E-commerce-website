@@ -2,12 +2,12 @@ import type { GetStaticProps, NextPage, InferGetStaticPropsType } from "next";
 import { createClient } from "contentful";
 import Body from "../../components/page/Body/Body";
 
-const BodyPage: NextPage = ({
-  body,
+const BriefsPage: NextPage = ({
+  briefs,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <main>
-      <Body bodyItem={body}></Body>
+      <Body bodyItem={briefs}></Body>
     </main>
   );
 };
@@ -18,17 +18,17 @@ export const getStaticProps: GetStaticProps = async () => {
     accessToken: process.env.CONTENTFUL_ACCESS_KEY as string,
   });
 
-  const body = await client.getEntries({
+  const briefs = await client.getEntries({
     content_type: "body",
-    "fields.label": "body",
+    "fields.label": "briefs",
   });
 
   return {
     props: {
-      body: body.items[0],
+      briefs: briefs.items[0],
     },
     revalidate: 600,
   };
 };
 
-export default BodyPage;
+export default BriefsPage;

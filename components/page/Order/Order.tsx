@@ -31,6 +31,7 @@ const Order = () => {
   const [errors, setErrors] = useState<{ [key: string]: boolean }>();
   const [checked, setChecked] = useState(false);
   const [noCheckedInfo, setCheckedInfo] = useState("");
+  const [loader, setLoader] = useState(false);
 
   useEffect(() => {
     if (checked) {
@@ -67,7 +68,7 @@ const Order = () => {
         color: el.fields.color,
         quantity: el.quantity,
         price: el.fields.price,
-        photo: el.fields.mainPhoto.fields.file.url,
+        photo: el.fields.mainPhoto.fields.file,
         size: el.fields?.size,
       };
     });
@@ -80,6 +81,7 @@ const Order = () => {
     };
 
     try {
+      setLoader(true);
       const res = await fetch("/api/order", {
         method: "POST",
         headers: {
@@ -92,6 +94,7 @@ const Order = () => {
       console.log(json);
       Cookie.set("order", JSON.stringify(body));
       if (res.status === 200 && json.message === "success") {
+        setLoader(false);
         router.push({
           pathname: "/order/completed",
           query: { orderId: json.orderNumber },
@@ -102,6 +105,7 @@ const Order = () => {
       }
     } catch (err) {
       console.log(err);
+      setLoader(false);
     }
   };
 
@@ -193,6 +197,7 @@ const Order = () => {
               form="hook-form"
               btnText="Kupuje i płacę"
               disabled={!totalPriceData.shipment.type ? true : false}
+              loader={loader}
             />
           </div>
         </div>

@@ -11,13 +11,20 @@ const BodyBanner: FC<{ banner: Banner }> = ({ banner }) => {
       <div className={s.content}>
         <div>
           <h2>{banner.fields.title}</h2>
-          <p>{banner.fields.description}</p>
+          <p className={s.description}>{banner.fields.description}</p>
         </div>
-        <Button
-          classname={s.btn}
-          path={banner.fields.path}
-          btnText={banner.fields.buttonName}
-        />
+        <div className={s.banners__btn}>
+          <Button
+            classname={s.btn}
+            path={banner.fields.path}
+            btnText={banner.fields.buttonName}
+          />
+          <Button
+            classname={s.btn}
+            path={"majtki-invisible"}
+            btnText={"bielizna"}
+          />
+        </div>
       </div>
       <div className={s.images__container}>
         <div className={s.banner__image}>
@@ -38,8 +45,10 @@ const BodyBanner: FC<{ banner: Banner }> = ({ banner }) => {
                 <Image
                   customLoader={true}
                   src={el.fields.file.url}
-                  layout="fill"
+                  layout="responsive"
                   objectFit="cover"
+                  height={el.fields.file.details.image?.height}
+                  width={el.fields.file.details.image?.width}
                   alt={el.fields.title}
                 ></Image>
               </div>

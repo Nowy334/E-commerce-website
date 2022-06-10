@@ -54,6 +54,8 @@
   color: white;
   transition: all 0.3s ease;
   cursor: pointer;
+  min-width: 20rem;
+  height: 4rem;
 
   &:hover {
     border-color: black;

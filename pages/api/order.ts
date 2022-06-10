@@ -4,8 +4,60 @@ import withProtect from "../../middleware/withProtect";
 import connectDB from "../../middleware/dbConnect";
 import Order from "../../models/Order";
 import admin from "../../lib/firebase/firebase";
+import fs from "fs";
+import path from "path";
+import Email from "helpers/email";
+
+type Attachments = {
+  filename: string;
+  path: string;
+  cid?: string;
+};
 
 var topic = "fcm";
+
+const tempClient = fs.readFileSync("./public/views/email/index.html", "utf-8");
+const tempTable = fs.readFileSync("./public/views/email/table.html", "utf-8");
+const tempOur = fs.readFileSync(
+  "./public/views/email/ourEmail/index.html",
+  "utf-8"
+);
+
+const replaceTemplate = (
+  temp: any,
+  orderNumber: number,
+  body: any,
+  table: any
+) => {
+  let output = temp.replace(/{%ORDERNUMBER%}/g, orderNumber.toString());
+  output = output.replace(/{%FIRSTNAME%}/g, body.form.firstName);
+  output = output.replace(/{%LASTNAME%}/g, body.form.lastName);
+  output = output.replace(/{%PHONENUMBER%}/g, body.form.phoneNumber.toString());
+  output = output.replace(/{%EMAIL%}/g, body.form.email);
+  output = output.replace(/{%COMMENTS%}/g, body.form.comments);
+  output = output.replace(/{%SHIPMENTTYPE%}/g, body.shipment.type);
+  output = output.replace(/{%SHIPMENTPRICE%}/g, body.shipment.price.toString());
+  output = output.replace(
+    /{%PRICE%}/g,
+    (body.shipment.price + body.totalPrice).toString()
+  );
+  output = output.replace(/{%STREET%}/g, body.form.street);
+  output = output.replace(/{%POSTCODE%}/g, body.form.postcode);
+  output = output.replace(/{%CITY%}/g, body.form.city);
+  output = output.replace(/{%TABLE%}/g, table);
+
+  return output;
+};
+
+const replaceTemplateTable = (el: any) => {
+  let output = tempTable.replace(/{%TITLE%}/g, el.title);
+  output = output.replace(/{%FILENAME%}/g, el.photo.fileName);
+  output = output.replace(/{%COLOR%}/g, el.color ? el.color[0] : el.title);
+  output = output.replace(/{%QUANTITY%}/g, el.quantity.toString());
+  output = output.replace(/{%PRICE%}/g, (el.price * el.quantity).toString());
+
+  return output;
+};
 
 const bodyMessage = (cart: any) => {
   let arrayTitle: any[] = [];
@@ -22,111 +74,60 @@ const generateOrderNumber = () => {
   return parseInt(digits.slice(7).join(""));
 };
 
-const nodemailer = require("nodemailer");
 const sendEmail = async (req: NextApiRequest, res: NextApiResponse) => {
-  const transporter = nodemailer.createTransport({
-    port: 465,
-    host: "smtp.gmail.com",
-    auth: {
-      user: "katya.zamowienia@gmail.com",
-      pass: process.env.EMAIL_PASSWORD,
-    },
-    secure: true,
-  });
-
   const orderNumber = generateOrderNumber();
 
-  const clientMessage = `
-      <h1>Potwierdzenie złożenia zamówienia</h1>
-      <p>Całkowita wartść, wraz z wysyłką ... </p>
-      <p>Prosimy o dokonanie przelewu na ponizsze dane:</p>
-      <p>
-      Numer konta:  14 1140 2004 0000 3802 7796 9903
-      </p>
-      <p>W razie jakichkolwiek pytań lub wątpliwości prosimy o kontakt telefoniczny 577 044 090 lub emailowy katya.rgleotards@gmail.com</p>
-      <div style="display: flex; align-items:center; justify-content:space-beetween;">
-      <div>
-      <div>Pozdrawiamy</div>
-      <div>zespół Katya RG Leotards</div>
-      </div>
-      <img src="cid:unique@kreata.ee" width="114px" heigth="136px"/>
-      </div>
-      `;
+  let mailAttachments: Attachments[] = [
+    {
+      filename: "logo.png",
+      path: "public/assets/logo.png",
+      cid: "unique@kreata.ee",
+    },
+  ];
 
-  const toMeMessage = `
-      <h1>Zamówienie </h1>
-      <p>Zamówiono: </p>
-      </br>
-      <table>
-      ${req.body.cart.map((el: any) => {
-        return `<tr>
-            <td>
-            <p>${el.title}</p>
-            <p>${el.color ? el.color[0] : el.title} </p>
-            </td>
-            <td>${el.quantity} szt</td>
-            <td>${el.price * el.quantity} zł</td>
-         </tr>
-         </br>`;
-      })}
-      <tr>
-      <td>Przesyłka:</td> <td>${req.body.shipment.type}</td><td> ${
-    req.body.shipment.price
-  }</td> </p>
-      </tr>
-      </table>
-      <div>Suma: ${req.body.totalPrice + req.body.shipment.price}</div>
-      </br>
-      <div>Dane kupującego: </div>
-      <p>Imie: ${req.body.form.firstName}</p>
-      <p>Nazwisko:  ${req.body.form.lastName}</p>
-      <p>Telefon: ${req.body.form.phoneNumber}</p>
-      <p>Email: ${req.body.form.email}</p>
-      <p>Kod pocztowy: ${req.body.form.postcode}</p>
-      <p>Miasto: ${req.body.form.city}</p>
-      <p>Ulica: ${req.body.form.street}</p>
-      <p>uwagi: ${req.body.form.comments}</p>
-      `;
+  req.body.cart.forEach((el: any) => {
+    mailAttachments.push({
+      filename: el.photo.fileName,
+      path: `https:${el.photo.url}`,
+      cid: `unique@${el.photo.fileName}`,
+    });
+  });
 
-  const mailClient = {
-    from: "katya.zamowienia@gmail.com",
-    to: req.body.form.email,
-    subject: `Potwierdzenie zamówienia`,
-    html: clientMessage,
-    attachments: [
-      {
-        filename: "logo.png",
-        path: "public/assets/logo.png",
-        cid: "unique@kreata.ee",
-      },
-    ],
-  };
+  const table = req.body.cart
+    .map((el: any) => replaceTemplateTable(el))
+    .join("");
 
-  const mailToMe = {
-    from: "katya.zamowienia@gmail.com",
-    to: "chrisfrompolish@gmail.com",
-    subject: `Zamówienie od ${req.body.form.firstName} ${req.body.form.lastName}`,
-    html: toMeMessage,
-  };
+  const clientMessage = replaceTemplate(
+    tempClient,
+    orderNumber,
+    req.body,
+    table
+  );
+  const toMeMessage = replaceTemplate(tempOur, orderNumber, req.body, table);
 
-  res.status(200).json({ message: "success", orderNumber: orderNumber });
-  return orderNumber;
+  const client = new Email(req.body.form.email, clientMessage, mailAttachments);
+  const me = new Email(
+    "22krzysztofify89@gmail.com",
+    toMeMessage,
+    mailAttachments.slice(1)
+  );
 
   let info, secondInfo;
-  //   try {
-  //     info = await transporter.sendMail(mailClient);
-  //     res.status(200).json({ message: "success" });
-  //     console.log("Message sent: %s", info.messageId);
-  //   } catch (err) {
-  //     res.status(400).json({ message: err });
-  //   }
+  try {
+    info = await client.send("Potwierdzenie zamówienia");
+    console.log("Message sent: %s", info.messageId);
+  } catch (err) {
+    res.status(400).json({ message: err });
+  }
 
-  //   try {
-  //     secondInfo = await transporter.sendMail(mailToMe);
-  //     console.log("Message sent: %s", secondInfo.messageId);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
+  try {
+    secondInfo = await me.send(`Nowe zamówienie ${orderNumber}`);
+    console.log("Message sent: %s", secondInfo.messageId);
+  } catch (err) {
+    console.log(err);
+  }
+
+  return orderNumber;
 };
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -151,7 +152,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           color: el.color ? el.color : undefined,
           quantity: el.quantity,
           price: el.price,
-          photo: el.photo,
+          photo: el.photo.url,
           size: el.size,
         };
       }),
@@ -187,8 +188,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         });
       console.log("save");
     } catch (err) {
+      res.status(400).json({ message: err });
       console.log(err);
     }
+    res.status(200).json({ message: "success", orderNumber: orderNumber });
   } catch (err) {
     console.log(err);
   }

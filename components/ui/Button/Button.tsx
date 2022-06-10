@@ -9,6 +9,7 @@ const Button: React.FC<{
   type?: "submit" | "reset" | "button";
   disabled?: boolean;
   form?: string;
+  loader?: boolean;
   onClick?: () => void;
 }> = ({
   path,
@@ -19,6 +20,7 @@ const Button: React.FC<{
   type = "button",
   disabled = false,
   form,
+  loader = false,
 }) => {
   return (
     <>
@@ -42,10 +44,10 @@ const Button: React.FC<{
           className={classes.btn + " " + classname ? classname : ""}
           onClick={onClick}
           type={type}
-          disabled={disabled}
+          disabled={disabled || loader}
           form={form}
         >
-          {btnText}
+          {loader ? <div className={classes.loader}></div> : btnText}
         </button>
       )}
     </>

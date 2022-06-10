@@ -82,6 +82,7 @@
 
 .add__cart {
   display: flex;
+  align-items: center;
   padding-top: 4rem;
 }
 
@@ -89,7 +90,7 @@
   border: none;
   background-color: #000;
   color: #fff;
-  padding: 1rem 4rem;
+  padding: 1.1rem 4rem;
   cursor: pointer;
 
   transition: all 0.3s ease;

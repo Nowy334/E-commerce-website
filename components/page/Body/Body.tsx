@@ -50,66 +50,83 @@ const Body: FC<{ bodyItem: any }> = ({ bodyItem }) => {
 
   return (
     <div className={s.root}>
-      <div className={s.image}>
-        <Image
-          customLoader={true}
-          src={bodyItem.fields.mainPhoto.fields.file.url}
-          alt="thumbnails"
-          objectFit="contain"
-          layout="fill"
-        ></Image>
-      </div>
-      <div className={s.content}>
-        <div className={s.title}>{bodyItem.fields.title}</div>
-        {/* <Price price={product.fields.price} s={s.product__price} /> */}
-        <div
-          className={s.desc}
-          dangerouslySetInnerHTML={{ __html: bodyItem.fields.description }}
-        ></div>
-        <div className={s.select__size}>
-          <CustomSelect
-            options={bodyItem.fields.sizes.sizes}
-            handleSelectOption={handleSelectOption}
-            label={"Rozmiar"}
-          ></CustomSelect>
-          <div className={s.price}>
-            <div className={s.title_price}>Cena</div>
-            <div>
-              {selectSize ? (
-                <Price price={selectSize?.price} s={s.product__price} />
-              ) : (
-                <div className={s.empty__price}>-</div>
-              )}{" "}
+      <div className={s.container}>
+        <div className={s.image}>
+          <Image
+            customLoader={true}
+            src={bodyItem.fields.cartPhoto.fields.file.url}
+            alt="thumbnails"
+            objectFit="contain"
+            layout="fill"
+          ></Image>
+        </div>
+        <div className={s.content}>
+          <div className={s.title}>{bodyItem.fields.title}</div>
+          {/* <Price price={product.fields.price} s={s.product__price} /> */}
+          <div
+            className={s.desc}
+            dangerouslySetInnerHTML={{ __html: bodyItem.fields.description }}
+          ></div>
+          <div className={s.select__size}>
+            <CustomSelect
+              options={bodyItem.fields.sizes.sizes}
+              handleSelectOption={handleSelectOption}
+              label={"Rozmiar"}
+            ></CustomSelect>
+            <div className={s.price}>
+              <div className={s.title_price}>Cena</div>
+              <div>
+                {selectSize ? (
+                  <Price price={selectSize?.price} s={s.product__price} />
+                ) : (
+                  <div className={s.empty__price}>-</div>
+                )}{" "}
+              </div>
             </div>
           </div>
-        </div>
-        <div className={s.add__cart}>
-          <div className={s.input__content}>
-            <span
-              className={s.quantity__changer}
-              onClick={() => changeQuantity("dec")}
-            >
-              <FiMinus />
-            </span>
-            <input
-              className={s.input}
-              type="number"
-              min="1"
-              step="1"
-              value={quantity}
-              onChange={(e) => changeQuantity("", e)}
-            />
-            <span
-              className={s.quantity__changer}
-              onClick={() => changeQuantity("inc")}
-            >
-              <FiPlus />
-            </span>
+          <div className={s.add__cart}>
+            <div className={s.input__content}>
+              <span
+                className={s.quantity__changer}
+                onClick={() => changeQuantity("dec")}
+              >
+                <FiMinus />
+              </span>
+              <input
+                className={s.input}
+                type="number"
+                min="1"
+                step="1"
+                value={quantity}
+                onChange={(e) => changeQuantity("", e)}
+              />
+              <span
+                className={s.quantity__changer}
+                onClick={() => changeQuantity("inc")}
+              >
+                <FiPlus />
+              </span>
+            </div>
+            <button className={s.add__cart__btn} onClick={handleAddToCart}>
+              Dodaj do koszyka
+            </button>
           </div>
-          <button className={s.add__cart__btn} onClick={handleAddToCart}>
-            Dodaj do koszyka
-          </button>
         </div>
+      </div>
+      <div className={s.gallery}>
+        {bodyItem.fields.pictures.map((el: any, i: number) => {
+          return (
+            <div className={s.gallery__image} key={i}>
+              <Image
+                customLoader={true}
+                src={el.fields.file.url}
+                alt={el.fields.title}
+                objectFit="contain"
+                layout="fill"
+              ></Image>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

@@ -1,65 +1,83 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+import fs from "fs";
+import Email from "helpers/email";
 
-const nodemailer = require("nodemailer");
+const tempClient = fs.readFileSync(
+  "./public/views/email/contact/clientContact.html",
+  "utf-8"
+);
+const tempOur = fs.readFileSync(
+  "./public/views/email/contact/ourContact.html",
+  "utf-8"
+);
+
+const tempMeasureOur = fs.readFileSync(
+  "./public/views/email/measures/index.html",
+  "utf-8"
+);
+
+const tempMeasureClient = fs.readFileSync(
+  "./public/views/email/measures/clientIndex.html",
+  "utf-8"
+);
+
+const replaceTemplate = (el: any, temp: any, measures: boolean = false) => {
+  let output = temp.replace(/{%DESCRIPTION%}/g, el.description);
+  output = output.replace(/{%TITLE%}/g, el.title);
+  output = output.replace(/{%FIRSTNAME%}/g, el.firstName);
+  output = output.replace(/{%EMAIL%}/g, el.email);
+
+  if (measures) {
+    el.measures.forEach((el: any, i: number) => {
+      output = output.replace(`{%data_${i + 1}%}`, el);
+    });
+  }
+
+  return output;
+};
+
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  if (req.method !== "POST") {
+  if (req.method !== "POST" || !req.body.code) {
     return res.status(400).json({ success: false });
   }
 
-  const transporter = nodemailer.createTransport({
-    port: 465,
-    host: "smtp.gmail.com",
-    auth: {
-      user: "katya.zamowienia@gmail.com",
-      pass: process.env.EMAIL_PASSWORD,
-    },
-    secure: true,
-  });
+  let clientMessage;
+  let client;
+  let toMeMessage;
+  let me;
+  let title;
 
-  const clientMessage = `test`;
+  if (req.body.code === "contact") {
+    title = "kontakt";
+    clientMessage = replaceTemplate(req.body, tempClient);
+    client = new Email(req.body.email, clientMessage);
 
-  const toMeMessage = `
-  <div>Imię:${req.body.firstName}</div>
-  <div>Imię:${req.body.email}</div>
-  <div>Imię:${req.body.description}</div>`;
+    toMeMessage = replaceTemplate(req.body, tempOur);
+    me = new Email("chrisfrompolish@gmail.com", toMeMessage);
+  } else if (req.body.code === "measures") {
+    title = "wymiary";
+    clientMessage = replaceTemplate(req.body, tempMeasureClient, true);
+    client = new Email(req.body.email, clientMessage);
 
-  const mailClient = {
-    from: "katya.zamowienia@gmail.com",
-    to: req.body.email,
-    subject: `Potwierdzenie zamówienia`,
-    html: clientMessage,
-    attachments: [
-      {
-        filename: "logo.png",
-        path: "public/assets/logo.png",
-        cid: "unique@kreata.ee",
-      },
-    ],
-  };
+    toMeMessage = replaceTemplate(req.body, tempMeasureOur, true);
+    me = new Email("chrisfrompolish@gmail.com", toMeMessage);
+  }
 
-  const mailToMe = {
-    from: "katya.zamowienia@gmail.com",
-    to: "chrisfrompolish@gmail.com",
-    subject: req.body.title,
-    html: toMeMessage,
-  };
+  //let info, secondInfo;
+  try {
+    await client?.send(`katya-rg.eu / ${title}`);
+    res.status(200).json({ message: "success" });
+    //console.log("Message sent: %s", info.messageId);
+  } catch (err) {
+    res.status(400).json({ message: err });
+  }
 
-  let info, secondInfo;
-  res.status(200).json({ message: "success" });
-  // try {
-  //   info = await transporter.sendMail(mailClient);
-  //   res.status(200).json({ message: "success" });
-  //   console.log("Message sent: %s", info.messageId);
-  // } catch (err) {
-  //   res.status(400).json({ message: err });
-  // }
-
-  // try {
-  //   secondInfo = await transporter.sendMail(mailToMe);
-  //   console.log("Message sent: %s", secondInfo.messageId);
-  // } catch (err) {
-  //   console.log(err);
-  // }
+  try {
+    await me?.send(`katya-rg.eu / ${title}`);
+    //console.log("Message sent: %s", secondInfo.messageId);
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 export default handler;

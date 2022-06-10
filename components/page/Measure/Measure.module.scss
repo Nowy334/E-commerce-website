@@ -57,21 +57,6 @@
   }
 }
 
-.btn {
-  border: 1px solid veriables.$main-color;
-  padding: 1rem 2rem;
-  background-color: veriables.$main-color;
-  color: white;
-  transition: all 0.3s ease;
-  cursor: pointer;
-
-  &:hover {
-    border-color: black;
-    background-color: transparent;
-    color: black;
-  }
-}
-
 .contact {
   margin-top: 5rem;
   width: 100%;

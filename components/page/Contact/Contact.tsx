@@ -16,6 +16,7 @@ const Contact = () => {
   const notifyError = () => {
     toast.error("Wystąpił problem. Spróbuj ponownie");
   };
+  const [loader, setLoader] = useState(false);
 
   const handleSubmit = async (
     e: any,
@@ -34,9 +35,11 @@ const Contact = () => {
       email: e.target.email.value,
       title: e.target.title.value,
       description: e.target.comments.value,
+      code: "contact",
     };
 
     try {
+      setLoader(true);
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: {
@@ -50,12 +53,15 @@ const Contact = () => {
       if (res.status === 200 && json.message === "success") {
         formRef.current.reset();
         notifySuccess();
+        setLoader(false);
       }
       if (res.status === 400 && json.message === "error") {
         notifyError();
+        setLoader(false);
       }
     } catch (err) {
       notifyError();
+      setLoader(false);
       console.log(err);
     }
   };
@@ -87,7 +93,12 @@ const Contact = () => {
         </div>
         <div className={s.form__container}>
           <h2 className={s.header}>Formularz kontaktowy</h2>
-          <ContactForm handleSubmit={handleSubmit} errors={errors} />
+          <ContactForm
+            handleSubmit={handleSubmit}
+            errors={errors}
+            loader={loader}
+            name="Imię *"
+          />
         </div>
       </main>
       <ToastContainer

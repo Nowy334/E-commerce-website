@@ -103,7 +103,7 @@ const Completed = () => {
                       <div className={s.product__image}>
                         <Image
                           customLoader={true}
-                          src={item.photo}
+                          src={item.photo.url}
                           alt={item.title}
                           objectFit="cover"
                           layout="fill"

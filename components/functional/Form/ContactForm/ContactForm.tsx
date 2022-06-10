@@ -8,7 +8,17 @@ const ContactForm: FC<{
   children?: React.PropsWithChildren<{}>;
   content?: boolean;
   classes?: string;
-}> = ({ handleSubmit, errors, children, content = true, classes }) => {
+  loader?: boolean;
+  name?: string;
+}> = ({
+  handleSubmit,
+  errors,
+  children,
+  content = true,
+  classes,
+  loader,
+  name,
+}) => {
   const formRef = useRef() as MutableRefObject<HTMLFormElement>;
   const handleData = (e: any) => {
     handleSubmit(e, formRef);
@@ -21,7 +31,7 @@ const ContactForm: FC<{
       onSubmit={handleData}
     >
       <div className={s.form__item}>
-        <label htmlFor="firstName">Imię *</label>
+        <label htmlFor="firstName">{name}</label>
         <input type="text" name="firstName" id="firstName" required />
       </div>
       <div className={s.form__item}>
@@ -42,7 +52,12 @@ const ContactForm: FC<{
         </div>
       ) : null}
       {children}
-      <Button classname={s.btn} type="submit" btnText="Wyślij wiadomość" />
+      <Button
+        loader={loader}
+        classname={s.btn}
+        type="submit"
+        btnText="Wyślij wiadomość"
+      />
     </form>
   );
 };
