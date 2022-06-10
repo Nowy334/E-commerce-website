@@ -11,7 +11,7 @@ There is also a dedicated mobile application for the store where the owner of th
 
 Main functionalities of the application:
 
-- adding products to the cart
+- shopping cart
 - instagram insight
 - the possibility of managing the store through headless cms
 - placing orders
