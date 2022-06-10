@@ -3,7 +3,7 @@ import { useState, MutableRefObject } from "react";
 import validateForm from "../../../helpers/validator";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { GrMail } from "react-icons/GR";
+import { GrMail } from "react-icons/Gr";
 import { HiHome } from "react-icons/Hi";
 import { AiFillPhone } from "react-icons/Ai";
 import s from "./Contact.module.scss";
